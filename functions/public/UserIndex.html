@@ -15,7 +15,7 @@
         <v-app style="background-color: black;">
           <!--ส่วนหัวปุ่มเมนูต่างๆ-->
             <v-app-bar app color="black" height=150>
-                <img src="LogoHP-Dark.png" height="175">
+                <img src="./pic/LogoHP-Dark.png" height="175">
                 <v-btn color="white" depressed x-large>Home</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่ม home-->
                 <v-btn color="white" depressed text x-large>Courses</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่มคอร์ส-->
                 <v-btn color="white" depressed text x-large>Foods</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่มอาหาร-->
@@ -23,12 +23,14 @@
                 <v-spacer></v-spacer>
                 
                 <div style="width: 200px; height: 55px; background-color: #FDA50B;"> <!--ส่วนของกล่องชื่อผู้ใช้-->
-                    
+                        
                             <div style="font-size: 22px; 
                             max-width: 150px; 
-                            margin-left:20px; 
-                            margin-top: 10px;" 
-                            class="d-inline-block text-truncate"><b>User0000000000000</b></div> <!--ชื่อผู้ใช้-->
+                            margin-left:10px; 
+                            margin-top: 7px;" 
+                            class="d-inline-block text-truncate">
+                            <v-avatar size="40" color="black white--text"></v-icon></v-avatar> <!--avatar สามารถใส่ pic ได้-->
+                            <b>User0000000000000</b></div> <!--ชื่อผู้ใช้-->
                 </div>
 
                 <v-menu bottom :offset-y="offset" 
@@ -49,10 +51,10 @@
                                         <v-list-item-title>Manage Account</v-list-item-title>
                                     </v-list-item-content>
                                 </template>
-                            <v-list-item @click=''>Edit Profile</v-list-item> <!-- เมนู Edit profile กับ Subscribe อยู่ใต้ Manage-->
-                            <v-list-item @click=''>Subscribe</v-list-item>
+                            <v-list-item :to="{path:'/editprofile'}">Edit Profile</v-list-item> <!-- เมนู Edit profile กับ Subscribe อยู่ใต้ Manage-->
+                            <v-list-item :to="{path:'/subscribe'}">Subscribe</v-list-item>
                             </v-list-group> <!--group เมนู manage account-->
-                            <v-list-item @click=''>Message</v-list-item> <!--เมนู ข้อความ -->
+                            <v-list-item @click='' >Message</v-list-item> <!--เมนู ข้อความ -->
                             <v-list-item @click=''>Setting</v-list-item><!--เมนู ตั้งค่า -->
                             <v-list-item @click=''><v-icon>exit_to_app</v-icon>&nbsp; Logout</v-list-item> <!--เมนู logout-->
                         </v-list>
@@ -60,12 +62,9 @@
             </v-app-bar>
 
             <v-content> 
-                    <div class="white">TEST!</div>
-                    <v-container> <!--container จะเป็น layout ช่วยครอบให้อยู่กลางจอ-->
-                        
-                    </v-container>
-                    
-                    
+                <router-view></router-view>
+              
+                
             </v-content>
               
         </v-app>
@@ -73,6 +72,91 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-router@3.1.3/dist/vue-router.min.js"></script>
     <script src="UserIndex.js" charset="UTF-8"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+<!--<div style="background-color: #FDA50B;">
+                    <v-container> 
+                        <div style="font-size: 28px;">
+                            <v-icon large color="black">edit</v-icon>&nbsp;
+                            <b>EDIT PROFILE</b>
+                        </div>
+                        <v-card width=500 class="mx-auto" color="white" outlined>
+                                <v-card-text>
+                                <div align="center" full-width><v-avatar size="200" color="black" ></v-avatar>
+                                    <div style="width: 250px;">
+                                        <v-file-input
+                                        accept="image/png, image/jpeg, image/bmp"
+                                        prepend-icon="mdi-camera"
+                                        placeholder="Upload Your Picture"></v-file-input>
+                                    </div>
+                                </div>
+                                <v-form class="black--text">
+                                        
+                                        <b style="font-size:larger;">Username</b>
+                                        <v-text-field outlined></v-text-field>
+                                        <b style="font-size:larger;">Password</b>
+                                        <v-text-field outlined></v-text-field>
+                                      
+                                    <v-divider></v-divider>
+                                    <v-row>
+                                        <v-col cols="12" sm="6">
+                                            <b style="font-size:larger;">Name</b>
+                                            <v-text-field outlined></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6">
+                                            <b style="font-size:larger;">Surename</b>
+                                            <v-text-field outlined></v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                        <b style="font-size:larger;">Email</b>
+                                        <v-text-field outlined></v-text-field>
+                                    <v-row>
+                                        <v-col cols="12" sm="6">
+                                            <b style="font-size:larger;">Bithday</b>
+                                            <v-text-field outlined></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6">
+                                            <b style="font-size:larger;">Phone No.</b>
+                                            <v-text-field outlined></v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                        <b style="font-size:larger;">Adress</b>
+                                        <v-text-field outlined></v-text-field>
+                                    <v-row>
+                                        <v-col cols="12" sm="4">
+                                            <b style="font-size:larger;">Blood Type</b>
+                                            <v-text-field outlined></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="4">
+                                            <b style="font-size:larger;">Weight</b>
+                                            <v-text-field outlined></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="4">
+                                            <b style="font-size:larger;">Height</b>
+                                            <v-text-field outlined></v-text-field>
+                                        </v-col>   
+                                    </v-row>
+                                    <b style="font-size:larger;">Personality</b>
+                                    <v-text-field outlined></v-text-field>
+                                </v-form>
+                                <v-divider></v-divider>
+                            </v-card-text>
+                            <v-card-actions>
+                                    <v-btn color="#FDA50B" class="mx-auto" large >
+                                        Save
+                                    </v-btn>
+                                </v-card-actions>
+                        </v-card>
+                    </v-container>
+                </div>-->
