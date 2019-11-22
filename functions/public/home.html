@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Healthy Pasta</title>
+</head>
+<body>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="/__/firebase/7.4.0/firebase-app.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+ https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="/__/firebase/7.4.0/firebase-analytics.js"></script>
+<!-- Initialize Firebase -->
+    <div id="app">
+        <v-app style="background-color: black;">
+            <v-app-bar
+                app
+                color="black"
+                height=150
+              >
+                <img src="./pic/LogoHP-Dark.png" height="175">
+                
+                <v-btn color="white" depressed x-large>
+                  Home</v-btn>&nbsp;&nbsp;&nbsp;
+                <v-btn color="white" depressed text x-large >Courses</v-btn>&nbsp;&nbsp;&nbsp;
+                <v-btn color="white" depressed text x-large>Foods</v-btn>&nbsp;&nbsp;&nbsp;
+                <v-btn color="white" depressed text x-large>Exercises</v-btn>
+                <v-spacer></v-spacer>
+                <v-btn color="white" text x-large>Register</v-btn>&nbsp;&nbsp;&nbsp;
+                <v-dialog
+                            v-model="login"
+                            width="400"
+                          >
+                            <template v-slot:activator="{ on }">
+                              <v-btn color="#FDA50B" outlined x-large
+                              v-on="on">Login</v-btn>
+                              </v-btn>
+                            </template>
+                      
+                            <v-card>
+                              <v-card-text class="pt-5">
+                                <v-form>
+                                  <b style="font-size:larger;">Username</b>
+                                  <v-text-field ></v-text-field>
+                                  <b style="font-size:larger;">Password</b>
+                                  <v-text-field :type="'password'" ></v-text-field>
+                                </v-form>
+                                <v-card-actions>
+                                    <v-btn
+                                    color="#FDA50B"
+                                    class="mx-auto"
+                                    large
+                                  >
+                                    LOGIN
+                                  </v-btn>
+                                  </v-card-actions>
+                              </v-card-text>
+                            </v-card>
+                        </v-dialog>  
+                        <form method="get" action="/time"><input type="submit" value="Error button!!" style="background:white"></form>
+            </v-app-bar>
+
+            
+            <v-content> 
+                    <v-container> 
+                        
+                    </v-container>
+            </v-content>
+              
+        </v-app>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="Project.js" charset="UTF-8"></script>
+</body>
+</html>

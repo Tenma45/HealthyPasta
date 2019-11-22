@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Healthy Pasta</title>
+</head>
+<body>
+    <div id="app">
+        <v-app style="background-color: black;">
+          <!--ส่วนหัวปุ่มเมนูต่างๆ-->
+            <v-app-bar app color="black" height=150>
+                <img src="/pic/LogoHP-Dark.png" height="175">
+                <v-btn color="white" depressed x-large>Home</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่ม home-->
+                <v-btn color="white" depressed text x-large>Courses</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่มคอร์ส-->
+                <v-btn color="white" depressed text x-large>Foods</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่มอาหาร-->
+                <v-btn color="white" depressed text x-large>Exercises</v-btn> <!--ปุ่มออกกำลังกาย-->
+                <v-spacer></v-spacer>
+                  <!--ส่วนของปุ่ม Register กดแล้วจะขึ้นฟอร์มลงทะเบียนแบบ pop up-->
+                <v-dialog v-model="register" width="500" persistent>
+                  <template v-slot:activator="{ on }">
+                    <v-btn color="white" text x-large v-on="on">Register</v-btn>
+                  </template>
+                  <!--ส่วนของฟอร์ม Register เป็น step-->
+                  <v-stepper v-model="e1">
+                    <v-stepper-header>
+                      <v-stepper-step :complete="e1 > 1" step="1" color="#FDA50B">Create Account</v-stepper-step>
+                      <v-divider></v-divider>
+                      <v-stepper-step step="2" color="#FDA50B">Your Information</v-stepper-step>
+                    </v-stepper-header>
+
+                    <v-stepper-item>
+                      <!--step 1-->
+                      <v-stepper-content step="1">
+                        <v-card>
+                          <v-card-text class="pt-5">
+                            <v-form>
+                              <b style="font-size:larger;">Username</b>
+                              <v-text-field ></v-text-field>
+                              <b style="font-size:larger;">Password</b>
+                              <v-text-field :type="'password'" ></v-text-field>
+                              <b style="font-size:larger;">Confirm Password</b>
+                              <v-text-field :type="'password'" ></v-text-field>
+                              </v-form>
+                          </v-card-text>
+                          <v-divider></v-divider>
+                          <v-card-actions>
+                              <v-spacer></v-spacer>
+                              <v-btn text large @click="register=false" > Cancel </v-btn> <!--กด cancel เพื่อปิด popup-->
+                              <v-btn color="#FDA50B" large @click="e1 = 2" > Next </v-btn>
+                           </v-card-actions>
+                        </v-card>
+                      </v-stepper-content>
+                      <!--step 2-->
+                      <v-stepper-content step="2">
+                          <v-card>
+                            <v-card-text class="pt-5">
+                              <v-form>
+                                <v-row>
+                                  <v-col cols="12" sm="6">
+                                    <b style="font-size:larger;">Name</b>
+                                    <v-text-field></v-text-field>
+                                    </v-col>
+                                    <v-col cols="12" sm="6">
+                                    <b style="font-size:larger;">Surename</b>
+                                    <v-text-field></v-text-field>
+                                    </v-col>
+                                </v-row>
+                                <b style="font-size:larger;">Email</b>
+                                <v-text-field></v-text-field>
+                                <v-row>
+                                  <v-col cols="12" sm="6">
+                                    <b style="font-size:larger;">Bithday</b>
+                                    <v-text-field></v-text-field>
+                                  </v-col>
+                                  <v-col cols="12" sm="6">
+                                      <b style="font-size:larger;">Phone No.</b>
+                                      <v-text-field></v-text-field>
+                                    </v-col>
+                                </v-row>
+                                <b style="font-size:larger;">Adress</b>
+                                <v-text-field></v-text-field>
+                                <v-row>
+                                    <v-col cols="12" sm="4">
+                                      <b style="font-size:larger;">Blood Type</b>
+                                      <v-text-field></v-text-field>
+                                    </v-col>
+                                    <v-col cols="12" sm="4">
+                                        <b style="font-size:larger;">Weight</b>
+                                        <v-text-field></v-text-field>
+                                    </v-col>
+                                    <v-col cols="12" sm="4">
+                                        <b style="font-size:larger;">Height</b>
+                                        <v-text-field></v-text-field>
+                                    </v-col>
+                                  </v-row>
+                                </v-form>
+                            </v-card-text>
+                            <v-divider></v-divider>
+                            <v-card-actions>
+                                <v-btn text outlined large @click="e1 = 1"> Back </v-btn>
+                                <v-spacer></v-spacer>
+                                <v-btn text large @click="register = false,e1 =1"> Cancel </v-btn> <!--กด cancel เพื่อปิด popup-->
+                                <v-btn color="#FDA50B" large> Create </v-btn>
+                            </v-card-actions>
+                          </v-card> 
+                        </v-stepper-content>
+                    </v-stepper-item>
+                  </v-stepper>
+                </v-dialog>
+                &nbsp;&nbsp;&nbsp;
+                
+                <!--ส่วนของปุ่ม Login กดแล้วจะขึ้นฟอร์มลงทะเบียน แบบ popup-->
+                <v-dialog v-model="login" width ="400">
+                  <template v-slot:activator="{ on }">
+                      <v-btn color="#FDA50B" outlined x-large v-on="on">Login</v-btn>
+                  </template>
+                  <!--ส่วนของฟอร์ม login-->
+                  <v-card>
+                    <div style="padding-top: 30px; text-align: center;"><b style="font-size: 24px;">Login to Healthy Pasta</b></div>
+                    <v-card-text class="pt-5">
+                      
+                      <v-form>
+                        <b style="font-size:larger;">Username</b>
+                        <v-text-field outlined ></v-text-field>
+                        <b style="font-size:larger;">Password</b>
+                        <v-text-field :type="'password'" outlined ></v-text-field>
+                        </v-form>
+                        <v-card-actions>
+                            <v-btn color="#FDA50B" class="mx-auto" large >
+                                LOGIN
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card-text>
+                  </v-card>
+                </v-dialog>  
+            </v-app-bar>
+
+            <v-content> 
+                    <v-container> 
+                      
+                    </v-container>
+            </v-content>
+              
+        </v-app>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="Index.js" charset="UTF-8"></script>
+</body>
+</html>
