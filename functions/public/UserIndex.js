@@ -6,9 +6,17 @@ const EditProfile={template:'<div style="background-color: #FDA50B;">\
         <b>EDIT PROFILE</b>\
     </div>\
     <v-card width=500 class="mx-auto" color="white" outlined>\
-        <v-card-text>\
+            <v-card-text>\
+            <div align="center" full-width><v-avatar size="200" color="black" ></v-avatar>\
+                <div style="width: 250px;">\
+                    <v-file-input\
+                    accept="image/png, image/jpeg, image/bmp"\
+                    prepend-icon="mdi-camera"\
+                    placeholder="Upload Your Picture"></v-file-input>\
+                </div>\
+            </div>\
             <v-form class="black--text">\
-                    <b style="font-size:larger;">Username</b>\
+            <b style="font-size:larger;">Username</b>\
                     <v-text-field outlined></v-text-field>\
                     <b style="font-size:larger;">Password</b>\
                     <v-text-field outlined></v-text-field>\
@@ -50,7 +58,7 @@ const EditProfile={template:'<div style="background-color: #FDA50B;">\
                         <b style="font-size:larger;">Height</b>\
                         <v-text-field outlined></v-text-field>\
                     </v-col>\
-               </v-row>\
+                </v-row>\
                 <b style="font-size:larger;">Personality</b>\
                 <v-text-field outlined></v-text-field>\
             </v-form>\
