@@ -7,6 +7,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+      <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+
+      <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+
+      <script>
+      var firebaseConfig = {
+      apiKey: "AIzaSyCrlPVyDk-XaSWGrHA_BYetv-8GLbKtLXQ",
+      authDomain: "realtimeapp-b69e4.firebaseapp.com",
+      databaseURL: "https://realtimeapp-b69e4.firebaseio.com",
+      projectId: "realtimeapp-b69e4",
+      storageBucket: "realtimeapp-b69e4.appspot.com",
+      messagingSenderId: "475515058493",
+      appId: "1:475515058493:web:19082714120d5a391d6d54",
+      measurementId: "G-Q1W0L53RTF"
+      };
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+      </script>
+
     <title>Healthy Pasta</title>
 </head>
 <body>
@@ -14,7 +34,7 @@
         <v-app style="background-color: black;">
           <!--ส่วนหัวปุ่มเมนูต่างๆ-->
             <v-app-bar app color="black" height=150>
-                <img src="/pic/LogoHP-Dark.png" height="175">
+                <img src="./pic/LogoHP-Dark.png" height="175">
                 <v-btn color="white" depressed x-large>Home</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่ม home-->
                 <v-btn color="white" depressed text x-large>Courses</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่มคอร์ส-->
                 <v-btn color="white" depressed text x-large>Foods</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่มอาหาร-->
@@ -58,55 +78,59 @@
                       <!--step 2-->
                       <v-stepper-content step="2">
                           <v-card>
-                            <v-card-text class="pt-5">
-                              <v-form>
+                            
+                              <v-form id="form1"
+                              action="/register"
+                              method="post"
+                              novalidate="true">
+                              <v-card-text class="pt-5">
                                 <v-row>
                                   <v-col cols="12" sm="6">
                                     <b style="font-size:larger;">Name</b>
-                                    <v-text-field></v-text-field>
+                                    <v-text-field name="name"></v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="6">
-                                    <b style="font-size:larger;">Surename</b>
-                                    <v-text-field></v-text-field>
+                                    <b style="font-size:larger;">Surname</b>
+                                    <v-text-field name="lastname"></v-text-field>
                                     </v-col>
                                 </v-row>
                                 <b style="font-size:larger;">Email</b>
-                                <v-text-field></v-text-field>
+                                <v-text-field name="email"></v-text-field>
                                 <v-row>
                                   <v-col cols="12" sm="6">
                                     <b style="font-size:larger;">Bithday</b>
-                                    <v-text-field></v-text-field>
+                                    <v-text-field name="bod"></v-text-field>
                                   </v-col>
                                   <v-col cols="12" sm="6">
                                       <b style="font-size:larger;">Phone No.</b>
-                                      <v-text-field></v-text-field>
+                                      <v-text-field name="tel"></v-text-field>
                                     </v-col>
                                 </v-row>
-                                <b style="font-size:larger;">Adress</b>
-                                <v-text-field></v-text-field>
+                                <b style="font-size:larger;">Address</b>
+                                <v-text-field name="address"></v-text-field>
                                 <v-row>
                                     <v-col cols="12" sm="4">
                                       <b style="font-size:larger;">Blood Type</b>
-                                      <v-text-field></v-text-field>
+                                      <v-text-field name="blood"></v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="4">
                                         <b style="font-size:larger;">Weight</b>
-                                        <v-text-field></v-text-field>
+                                        <v-text-field name="weight"></v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="4">
                                         <b style="font-size:larger;">Height</b>
-                                        <v-text-field></v-text-field>
+                                        <v-text-field name="height"></v-text-field>
                                     </v-col>
                                   </v-row>
-                                </v-form>
                             </v-card-text>
                             <v-divider></v-divider>
                             <v-card-actions>
                                 <v-btn text outlined large @click="e1 = 1"> Back </v-btn>
                                 <v-spacer></v-spacer>
                                 <v-btn text large @click="register = false,e1 =1"> Cancel </v-btn> <!--กด cancel เพื่อปิด popup-->
-                                <v-btn color="#FDA50B" large> Create </v-btn>
+                                <v-btn type="submit" color="#FDA50B" large> Create </v-btn>
                             </v-card-actions>
+                          </v-form>
                           </v-card> 
                         </v-stepper-content>
                     </v-stepper-item>
