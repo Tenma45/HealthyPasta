@@ -21,6 +21,7 @@ app.get('/',(req,res)=>{
 })
 
 app.post('/register',(req,res)=>{
+    req.body.role="client"
     memberref.push(req.body)
     res.sendFile(path.join(__dirname,'/public/UserIndex.html'));
 
