@@ -21,13 +21,12 @@ app.get('/',(req,res)=>{
 })
 
 app.post('/register',(req,res)=>{
-    console.log(req.body.name)
     memberref.push(req.body)
-    res.send("Success register");
+    res.sendFile(path.join(__dirname,'/public/UserIndex.html'));
 
 })
 
-app.get('/time',(req,res)=>{
+app.get('/error',(req,res)=>{
     res.sendFile(path.join(__dirname,'/public/404.html'));
 })
 
