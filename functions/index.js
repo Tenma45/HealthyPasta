@@ -5,7 +5,7 @@ const app = express();
 var site_root = path.resolve(__dirname+'/..');
 
 app.get('/',(req,res)=>{
-    res.sendFile(path.join(__dirname,'/public/index.html'));
+    res.sendFile(path.join(__dirname,'/public/home.html'));
 })
 
 app.get('/time',(req,res)=>{
