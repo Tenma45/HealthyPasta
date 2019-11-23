@@ -56,7 +56,9 @@
                             </v-list-group> <!--group เมนู manage account-->
                             <v-list-item @click='' >Message</v-list-item> <!--เมนู ข้อความ -->
                             <v-list-item @click=''>Setting</v-list-item><!--เมนู ตั้งค่า -->
-                            <v-list-item @click=''><v-icon>exit_to_app</v-icon>&nbsp; Logout</v-list-item> <!--เมนู logout-->
+                            <form action="/logout" method="post">
+                            <v-list-item @click=''><v-icon type="submit">exit_to_app</v-icon>&nbsp; Logout</v-list-item> <!--เมนู logout-->
+                             </form>
                         </v-list>
                 </v-menu>
             </v-app-bar>

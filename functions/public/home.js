@@ -1,75 +1,79 @@
 new Vue({
     el: '#app',
     vuetify: new Vuetify(),
-    data :{
-        username: null,
-        password: null,
-        firstname: null,
-        lastname: null,
-        bod: null,
-        email: null,
-        address: null,
-        tel: null,
-        blood: null,
-        weight: null,
-        height: null,
-        login:false,
-        register:false,
-        e1:0,
-        errors: []       
-        },
+    data : function () {
+        return {
+            username: '',
+            password: '',
+            cfpassword: '',
+            firstname: 'dummy',
+            lastname: 'dummy',
+            bod: '01/01/2000',
+            email: 'dummy@gmail.com',
+            address: 'dummy',
+            tel: '0000000000',
+            blood: 'A',
+            weight: '100',
+            height: '100',
+            login:false,
+            register:false,
+            e1:0,
+            required: function(v) { return v.length >0 || "This field is required"}, 
+            minimum: v => v.length >=5 || "At least 5 characters",
+            rules: {
+            },
+        }   
+    },
+        computed: {
+            confirmpassword () { 
+                return (this.cfpassword === this.password) || 'Password must match'
+              }
+            },
     methods: {
-        /*registerOn() {
-            alert("TEST")
-            axios.post('/register2', {
-                email: this.email,
-                username: this.username
-            })
-        },*/
-        checkForm1: function (e) {
-            
-            this.errors = [];
-      
-            if (!this.username) {
-              this.errors.push('Username required.');
-            }
-            if (!this.password) {
-              this.errors.push('Password required.');
-            }
-            if(this.errors.length===0){
-                this.e1=2;
-            }
+        submit2 (e) {
+            if (this.$refs.form0.validate()){
+              return true;
+              }
+              else {
+                e.preventDefault();
+              }
+         },
+        submit1 (e) {
+
+            console.log(this.$refs.form0.validate())
+            if (this.$refs.form0.validate()){
+                this.firstname= ''
+                this.lastname= ''
+                this.bod= ''
+                this.email= ''
+                this.address= ''
+                this.tel= ''
+                this.blood= ''
+                this.weight= ''
+                this.height= ''
+                this.e1=2; 
+               return true;
+              } 
+              else {
+                  e.preventDefault();
+              }
           },
-        checkForm2: function (e) {
-            
-            this.errors = [];
-            
-            if (!this.firstname) {
-                this.errors.push('Name required.');
-            }
-
-            if(this.errors.length===0){
-                return true;
-            } 
-
-            e.preventDefault();
-        },
         resetForm: function (e) {
-            this.username= null
-            this.password= null
-            this.firstname= null
-            this.lastname= null
-            this.bod= null
-            this.email= null
-            this.address= null
-            this.tel= null
-            this.blood= null
-            this.weight= null
-            this.height= null
+            this.username= ''
+            this.password= ''
+            this.repassword= ''
+            this.firstname= ''
+            this.lastname= ''
+            this.bod= ''
+            this.email= ''
+            this.address= ''
+            this.tel= ''
+            this.blood= ''
+            this.weight= ''
+            this.height= ''
             this.login=false
             this.register=false
-            this.e1=0
-            this.errors= []     
+            this.e1=0 
             return true;
         }    
     }
