@@ -91,6 +91,17 @@ new Vue({
 
 
             methods: {
+              pushtest(e){
+                
+                rand=Math.floor(Math.random() * 1000);
+                this.events.push({
+                  name: 'New Event',
+                  start: '2019-11-27',
+                  end: "2019-11-29",
+                  color: '#'+rand,
+                  details: 'No',
+                })
+              },
                 viewDay ({ date }) {
                   this.focus = date
                   this.type = 'day'
