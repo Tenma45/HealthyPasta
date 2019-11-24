@@ -2,11 +2,17 @@ const functions = require('firebase-functions');
 const express = require('express');
 const path = require('path')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const expressValidator = require('express-validator')
+const session = require('express-session')
 const app = express();
 var firebase = require('firebase-admin');
 var serviceAccount = require('./serviceAccountKey.json')
 
+app.use(cookieParser('sign'))
 app.use(bodyParser());
+//app.use(expressValidator());
+app.use(session({ saveUninitialized: false, resave: false}))
 
 firebase.initializeApp({
     credential: firebase.credential.cert(serviceAccount),
@@ -17,23 +23,43 @@ const database = firebase.database();
 const memberref = database.ref('member')
 
 app.get('/',(req,res)=>{
-    res.sendFile(path.join(__dirname,'/public/home.html'));
+    if(req.session.username){
+        
+    console.log("ID= "+req.session.username)
+        res.sendFile(path.join(__dirname,'/public/UserIndex.html'));
+    }
+    else {
+        res.sendFile(path.join(__dirname,'/public/home.html'));
+    }
 })
 
 app.post('/register',(req,res)=>{
+    console.log("DO2")
     req.body.role="client"
-    memberref.push(req.body)
-    res.sendFile(path.join(__dirname,'/public/UserIndex.html'));
+    memberref.child("/"+req.body.username).set(req.body)
+    req.session.username=req.body.username
+    console.log("1"+req.body.username)
+    console.log("2"+req.body.firstname)
+    console.log("3"+req.body.role)
+    res.redirect('/')
+})
 
+app.post('/login',(req,res)=>{
+    res.sendFile(path.join(__dirname,'/public/UserIndex.html'));
+})
+
+app.post('/logout',(req,res)=>{
+    req.session.username=null;
+    res.redirect('/')
 })
 
 app.get('/error',(req,res)=>{
+    
     res.sendFile(path.join(__dirname,'/public/404.html'));
 })
 
 app.listen(process.env.port,()=>{
-    console.log("Server on "+process.env.port);
-}
-)
+    console.log("Server is on");
+})
 
 exports.app = functions.https.onRequest(app);

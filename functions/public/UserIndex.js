@@ -1,4 +1,3 @@
-
 const EditProfile={template:'<div style="background-color: #FDA50B;">\
 <v-container>\
     <div style="font-size: 28px;">\
