@@ -55,7 +55,7 @@ const router=new VueRouter ({
 
 new Vue({
     el: '#app',
-    router,
+    //router,
     vuetify: new Vuetify(),
     data : function () {
         return {
