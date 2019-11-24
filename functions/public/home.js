@@ -28,7 +28,7 @@ const Course={template:`<v-container>
             <v-card-actions>
                 <v-dialog v-model="choose2" width="500" >
                     <template v-slot:activator="{ on }">
-                        <v-btn color="#FDA50B"  x-large class="mx-auto" outlined depressed v-on="on" >
+                        <v-btn color="#FDA50B" rounded  x-large class="mx-auto" outlined depressed v-on="on" >
                             <span class="title font-weight-bold" >เลือก</span>
                         </v-btn>
                     </template>
