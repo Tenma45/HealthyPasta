@@ -6,6 +6,8 @@ new Vue({
             user:false,
             offset:true,
             closeOnContentClick:false,
+
+            choose:false,
             
         }
     },

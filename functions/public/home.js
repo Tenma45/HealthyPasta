@@ -3,9 +3,24 @@ new Vue({
     vuetify: new Vuetify(),
     data (){
         return {
+          items: [
+            {
+              src: './pic/slider-1.png',
+            },
+            {
+              src: './pic/slider-2.png',
+            },
+            {
+              src: './pic/slider-3.png',
+            },
+            {
+              src: './pic/slider-4.png',
+            },
+          ],
             login:false,
             register:false,
             e1:0,
+            
         }
     },
 })
@@ -37,3 +52,4 @@ new Vue({
         }
       }
     })
+
