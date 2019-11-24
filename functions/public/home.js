@@ -50,8 +50,6 @@ const router=new VueRouter ({
         {path:'', component:Home},
         {path:'/home', component:Home},
         {path:'/course', component:Course},
-            
-        
     ]
 })
 
@@ -62,7 +60,7 @@ new Vue({
     data : function () {
         return {
 
-items: [
+    items: [
   {
     src: './pic/slider-1.png',
   },

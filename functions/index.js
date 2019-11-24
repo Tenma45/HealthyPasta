@@ -23,14 +23,23 @@ const database = firebase.database();
 const memberref = database.ref('member')
 
 app.get('/',(req,res)=>{
+        res.redirect('/home')
+})
+
+app.get('/home',(req,res)=>{
     
-    console.log("ID!!!= "+req.session.username)
     if(req.session.username){
-    console.log("ID = "+req.session.username)
-        res.sendFile(path.join(__dirname,'/public/UserIndex.html'));
+        if(req.session.role=="client"){
+            res.sendFile(path.join(__dirname,'/public/UserIndex.html'));
+        }
+        if(req.session.role=="trainer"){
+            res.sendFile(path.join(__dirname,'/public/TrainerIndex.html'));
+        }
+        if(req.session.role=="fdm"){
+            res.sendFile(path.join(__dirname,'/public/DeliMan.html'));
+        }
     }
     else {
-    console.log("NO ID")
         res.sendFile(path.join(__dirname,'/public/home.html'));
     }
 })
@@ -48,7 +57,7 @@ app.post('/login',(req,res)=>{
         if(snapshot.child(req.body.username).exists()){
             if(snapshot.child(req.body.username).child("password").val()==req.body.password){
                 req.session.username=req.body.username
-                req.session.role=req.body.role
+                req.session.role=snapshot.child(req.body.username).child("role").val()
                 res.redirect('/')
             }
             else{
