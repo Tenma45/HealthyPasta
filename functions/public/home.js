@@ -21,22 +21,20 @@ items: [
             username: '',
             password: '',
             cfpassword: '',
-            firstname: 'dummy',
-            lastname: 'dummy',
-            bod: '01/01/2000',
-            email: 'dummy@gmail.com',
-            address: 'dummy',
-            tel: '0000000000',
-            blood: 'A',
-            weight: '100',
-            height: '100',
+            firstname: '',
+            lastname: '',
+            bod: '',
+            email: '',
+            address: '',
+            tel: '',
+            blood: '',
+            weight: '',
+            height: '',
             login:false,
             register:false,
-            e1:0,
+            e1:1,
             required: function(v) { return v.length >0 || "This field is required"}, 
             minimum: v => v.length >=5 || "At least 5 characters",
-            rules: {
-            },
         }   
     },
         computed: {
@@ -54,8 +52,6 @@ items: [
               }
          },
         submit1 (e) {
-
-            console.log(this.$refs.form0.validate())
             if (this.$refs.form0.validate()){
                 this.firstname= ''
                 this.lastname= ''
@@ -73,23 +69,43 @@ items: [
                   e.preventDefault();
               }
           },
-        resetForm: function (e) {
+       cancel (e) {
             this.username= ''
             this.password= ''
-            this.repassword= ''
-            this.firstname= ''
-            this.lastname= ''
-            this.bod= ''
-            this.email= ''
-            this.address= ''
-            this.tel= ''
-            this.blood= ''
-            this.weight= ''
-            this.height= ''
-            this.login=false
             this.register=false
-            this.e1=0 
+            this.e1=1 
+            this.setDummy();
             return true;
-        }    
+        },
+        removeDummy(){
+            this.username= ''
+            this.password= ''
+            this.cfpassword= ''
+            this.firstname= '',
+            this.lastname= '',
+            this.bod= '',
+            this.email= '',
+            this.address= '',
+            this.tel= '',
+            this.blood= '',
+            this.weight= '',
+            this.height= ''
+        },
+        setDummy (){
+            this.firstname= 'dummy',
+            this.lastname= 'dummy',
+            this.bod= '01/01/2000',
+            this.email= 'dummy@gmail.com',
+            this.address= 'dummy',
+            this.tel= '0000000000',
+            this.blood= 'A',
+            this.weight= '100',
+            this.height= '100'
+        },
+        loginOn (e){
+            axios.post('/checkuser')
+            .then(res=>console.log(res))
+            .catch(error=>console.log(error))
+        }
     }
 })

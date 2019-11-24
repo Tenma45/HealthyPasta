@@ -93,6 +93,9 @@ new Vue({
             
         }
     },
+    methods: {
+        
+    }
 })
 
 
