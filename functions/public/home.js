@@ -59,8 +59,12 @@ new Vue({
     vuetify: new Vuetify(),
     data : function () {
         return {
+<<<<<<< HEAD
+items: [
+=======
 
     items: [
+>>>>>>> 1285e2fb682ceee1953d643979335f71391bd0a2
   {
     src: './pic/slider-1.png',
   },
