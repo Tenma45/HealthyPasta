@@ -3,7 +3,6 @@ new Vue({
     vuetify: new Vuetify(),
     data : function () {
         return {
-
 items: [
   {
     src: './pic/slider-1.png',
