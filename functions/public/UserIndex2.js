@@ -103,7 +103,7 @@ const Course={template:`<v-container>
                                 <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined>
                                     ยกเลิก
                                 </v-btn>
-                                <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined >
+                                <v-btn :to="{path:'/course2'}" color="black" class="font-weight-bold mx-auto" x-large outlined >
                                     ยืนยัน
                                 </v-btn>
                         </v-card-actions>
@@ -199,7 +199,8 @@ const Course2={template:`<v-container>
 </v-card>
 </v-container>`}
 
-const Subscribe={template:'<div class="white">Subscribe</div>'}
+const Subscribe={template:'<div class="white">Subscribe2</div>'}
+const Food ={template:'<div class="white">FOOD!!</div>'}
 
 const router=new VueRouter ({
     routes : [
@@ -225,6 +226,9 @@ new Vue({
             
         }
     },
+    methods: {
+
+    }
 })
 
 

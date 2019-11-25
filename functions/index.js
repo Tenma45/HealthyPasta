@@ -23,10 +23,21 @@ const database = firebase.database();
 const memberref = database.ref('member')
 
 app.get('/',(req,res)=>{
+        res.redirect('/home')
+})
+
+app.get('/home',(req,res)=>{
+    
     if(req.session.username){
-        
-    console.log("ID= "+req.session.username)
-        res.sendFile(path.join(__dirname,'/public/UserIndex.html'));
+        if(req.session.role=="client"){
+            res.sendFile(path.join(__dirname,'/public/UserIndex.html'));
+        }
+        if(req.session.role=="trainer"){
+            res.sendFile(path.join(__dirname,'/public/TrainerIndex.html'));
+        }
+        if(req.session.role=="fdm"){
+            res.sendFile(path.join(__dirname,'/public/DeliMan.html'));
+        }
     }
     else {
         res.sendFile(path.join(__dirname,'/public/home.html'));
@@ -34,22 +45,34 @@ app.get('/',(req,res)=>{
 })
 
 app.post('/register',(req,res)=>{
-    console.log("DO2")
     req.body.role="client"
     memberref.child("/"+req.body.username).set(req.body)
     req.session.username=req.body.username
-    console.log("1"+req.body.username)
-    console.log("2"+req.body.firstname)
-    console.log("3"+req.body.role)
+    req.session.role=req.body.role
     res.redirect('/')
 })
 
 app.post('/login',(req,res)=>{
-    res.sendFile(path.join(__dirname,'/public/UserIndex.html'));
+    memberref.once("value", function(snapshot) {
+        if(snapshot.child(req.body.username).exists()){
+            if(snapshot.child(req.body.username).child("password").val()==req.body.password){
+                req.session.username=req.body.username
+                req.session.role=snapshot.child(req.body.username).child("role").val()
+                res.redirect('/')
+            }
+            else{
+                res.redirect('/')
+            }
+        }
+        else{
+            res.redirect('/')   
+        }
+    })
 })
 
-app.post('/logout',(req,res)=>{
+app.get('/logout',(req,res)=>{
     req.session.username=null;
+    req.session.role=null;
     res.redirect('/')
 })
 

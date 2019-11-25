@@ -18,7 +18,7 @@
                 <img src="./pic/LogoHP-Dark.png" height="175">
                 <v-btn color="white" depressed x-large>Home</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่ม home-->
                 <v-btn color="white" depressed text x-large :to="{path:'/course'}">Courses</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่มคอร์ส-->
-                <v-btn color="white" depressed text x-large>Foods</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่มอาหาร-->
+                <v-btn color="white" depressed text x-large  :to="{path:'/food'}">Foods</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่มอาหาร-->
                 <v-btn color="white" depressed text x-large>Exercises</v-btn> <!--ปุ่มออกกำลังกาย-->
                 <v-spacer></v-spacer>
                 
@@ -56,17 +56,13 @@
                             </v-list-group> <!--group เมนู manage account-->
                             <v-list-item @click='' >Message</v-list-item> <!--เมนู ข้อความ -->
                             <v-list-item @click=''>Setting</v-list-item><!--เมนู ตั้งค่า -->
-                            <form action="/logout" method="post">
-                            <v-list-item @click=''><v-icon type="submit">exit_to_app</v-icon>&nbsp; Logout</v-list-item> <!--เมนู logout-->
-                             </form>
+                            <v-list-item href="/logout" @click=''><v-icon >exit_to_app</v-icon>&nbsp; Logout</v-list-item> <!--เมนู logout-->
                         </v-list>
                 </v-menu>
             </v-app-bar>
 
             <v-content> 
                 <router-view></router-view>
-              
-                
             </v-content>
               
         </v-app>
@@ -75,7 +71,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-router@3.1.3/dist/vue-router.min.js"></script>
-    <script src="UserIndex.js" charset="UTF-8"></script>
+    <script src="./UserIndex2.js" charset="UTF-8"></script>
 </body>
 </html>
 
