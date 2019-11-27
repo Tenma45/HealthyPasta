@@ -1,14 +1,29 @@
-const Home={template:`<v-container> 
+const Home={template:`
+<v-container> 
 <template>
   <v-carousel>
-    <v-carousel-item v-for="item in items">
-    <p>{{items}}</p>
+    <v-carousel-item v-for="item in items" :key="i">
       <v-img :src="item.src"></v-img>
     </v-carousel-item>
   </v-carousel>
 </template>
-</v-container>`}
-
+</v-container>`,
+data: () => ({
+  items: [
+    {
+      src: '/pic/slider-1.png',
+    },
+    {
+      src: '/pic/slider-2.png',
+    },
+    {
+      src: '/pic/slider-3.png',
+    },
+    {
+      src: '/pic/slider-4.png',
+    },
+  ]
+})}
 const Course={template:`<v-container>
 <div align="center"><img src="./pic/course-1.png" height="300"></div>
 <div class="white--text" style="text-decoration: underline; font-size: 24px;" > เลือก Course ที่ใช่ด้วยใจที่ชอบ</div>
@@ -58,20 +73,20 @@ new Vue({
     vuetify: new Vuetify(),
     data : function () {
         return {
-items: [
-  {
-    src: './pic/slider-1.png',
-  },
-  {
-    src: './pic/slider-2.png',
-  },
-  {
-    src: './pic/slider-3.png',
-  },
-  {
-    src: './pic/slider-4.png',
-  },
-],
+            items: [
+              {
+                src: '/pic/slider-1.png',
+              },
+              {
+                src: '/pic/slider-2.png',
+              },
+              {
+                src: '/pic/slider-3.png',
+              },
+              {
+                src: '/pic/slider-4.png',
+              },
+            ],
             username: '',
             password: '',
             cfpassword: '',
