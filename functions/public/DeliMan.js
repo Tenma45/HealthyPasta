@@ -93,7 +93,7 @@ const Request={template:`
                                 <span style="font-size: 24px;">คุณยืนยันที่จะรับคำขอของผู้ใช้รายนี้ <br/> ใช่หรือไม่?</span>
                                 <div><v-icon size=120 color="#FDA50B">warning</v-icon></div>
                                 <v-card-actions>
-                                        <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined >
+                                        <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined @click="choose=false" >
                                             ไม่ยืนยัน
                                         </v-btn>
                                         <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined >
@@ -108,7 +108,32 @@ const Request={template:`
         </v-row>
     </v-card-text>
   </v-card>
-  </v-container>`}
+  </v-container>`,
+  data (){
+    return {
+        user:false,
+        offset:true,
+        closeOnContentClick:false,
+        info:false,
+        choose:false,
+        foods: [
+            {
+              name: 'เกาเหลาเส้นบุก',
+              cost: 950,
+              count: 1,
+              totalcost: 950,
+            },
+            {
+                name: 'เกาเหลาเส้นบุก',
+                cost: 950,
+                count: 1,
+                totalcost: 950,
+              },
+            
+          ],
+        
+    }
+},}
 
 const Reqmanage={template:`
 <v-container> 
@@ -201,7 +226,32 @@ const Reqmanage={template:`
         </v-row>
     </v-card-text>
   </v-card>
-</v-container>`}
+</v-container>`,
+data (){
+    return {
+        user:false,
+        offset:true,
+        closeOnContentClick:false,
+        info:false,
+        choose:false,
+        foods: [
+            {
+              name: 'เกาเหลาเส้นบุก',
+              cost: 950,
+              count: 1,
+              totalcost: 950,
+            },
+            {
+                name: 'เกาเหลาเส้นบุก',
+                cost: 950,
+                count: 1,
+                totalcost: 950,
+              },
+            
+          ],
+        
+    }
+},}
 
 const router=new VueRouter ({
     routes : [
