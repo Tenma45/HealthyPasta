@@ -100,7 +100,7 @@ const Course={template:`<v-container>
                         <span style="font-size: 24px;">คุณยืนยันที่จะเลือก Course นี้ ใช่หรือไม่?</span>
                         <div><v-icon size=120 color="#FDA50B">warning</v-icon></div>
                         <v-card-actions>
-                                <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined>
+                                <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined @click="choose=false">
                                     ยกเลิก
                                 </v-btn>
                                 <v-btn :to="{path:'/course2'}" color="black" class="font-weight-bold mx-auto" x-large outlined >
@@ -115,7 +115,15 @@ const Course={template:`<v-container>
     </v-row>
 </v-card-text>
 </v-card>
-</v-container>`}
+</v-container>`,
+data (){
+  return {
+      user:false,
+      offset:true,
+      closeOnContentClick:false,
+      choose:false, //ส่วนที่เพิ่มมา
+  }
+},}
 
 //after choose
 const Course2={template:`<v-container>
@@ -299,7 +307,7 @@ const Course2={template:`<v-container>
                         <span style="font-size: 24px;">คุณยืนยันที่จะยกเลิก Course นี้ ใช่หรือไม่?</span>
                         <div><v-icon size=120 color="#FDA50B">warning</v-icon></div>
                         <v-card-actions>
-                                <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined>
+                                <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined @click="cancel=false">
                                     ยกเลิก
                                 </v-btn>
                                 <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined >
@@ -316,24 +324,23 @@ const Course2={template:`<v-container>
 </v-card>
 </v-container>`,
 data (){
-    
-    return {
-
-        user:false,
-            offset:true,
-            closeOnContentClick:false,
-            calendar:false,
-            choose:false,
-
-
+  return {
+      user:false,
+      offset:true,
+      closeOnContentClick:false,
+      choose:false, //ส่วนที่เพิ่มมา
+      sche:false, //ส่วนที่เพิ่มมา
+      trainerinfo:false, //ส่วนที่เพิ่มมา
+      cancel:false,
+      
       today: "today",
       focus: "today",
       type: 'month',
       typeToLabel: {
-        month: 'Month',
-        week: 'Week',
-        day: 'Day',
-        '4day': '4 Days',
+          month: 'Month',
+          week: 'Week',
+          day: 'Day',
+          '4day': '4 Days',
       },
 
       start: null,
@@ -342,123 +349,123 @@ data (){
       selectedElement: null,
       selectedOpen: false,
 
-            events: [
-                {
+              events: [
+                  {
                   name: 'Meeting with GF',
                   start: '2019-11-07',
                   end: "2019-11-09",
                   color: 'green',
                   details: 'Going to the school!',
-                },
-
-                {
-                    name: 'Meeting with MF',
-                    start: '2019-11-09',
-                    end: "2019-11-12",
-                    color: 'blue',
-                    details: 'Going to the school!',
                   },
-                
+
+                  {
+                      name: 'Meeting with MF',
+                      start: '2019-11-09',
+                      end: "2019-11-12",
+                      color: 'blue',
+                      details: 'Going to the school!',
+                  },
+                  
               ],
-            }
-        }, //ปิดของ data
-            
+      
+  }
+}, //ปิดของ data
+computed: {
+  title() {
+    
+    const { start, end } = this
+    if (!start || !end) {
+      return ''
+    }
+    const startMonth = this.monthFormatter(start)
+    const endMonth = this.monthFormatter(end)
+    const suffixMonth = startMonth === endMonth ? '' : endMonth
+    const startYear = start.year
+    const endYear = end.year
+    const suffixYear = startYear === endYear ? '' : endYear
+    const startDay = start.day + this.nth(start.day)
+    const endDay = end.day + this.nth(end.day)
+    
+    switch (this.type) {
+      case 'month':
+        return `${startMonth} ${startYear}`
+      case 'week':
+      case '4day':
+        return `${startMonth} ${startDay} ${startYear} - ${suffixMonth} ${endDay} ${suffixYear}`
+      case 'day':
+        return `${startMonth} ${startDay} ${startYear}`
+    }
+    return ''
+  },
+  
+  monthFormatter () {
+    return this.$refs.calendar.getFormatter({
+      timeZone: 'UTC', month: 'long',
+    })
+  },
+
+},//ปิดของ computed
 
 
-        computed: {
-            title() {
-              
-              const { start, end } = this
-              if (!start || !end) {
-                return ''
-              }
-              const startMonth = this.monthFormatter(start)
-              const endMonth = this.monthFormatter(end)
-              const suffixMonth = startMonth === endMonth ? '' : endMonth
-              const startYear = start.year
-              const endYear = end.year
-              const suffixYear = startYear === endYear ? '' : endYear
-              const startDay = start.day + this.nth(start.day)
-              const endDay = end.day + this.nth(end.day)
-              
-              switch (this.type) {
-                case 'month':
-                  return `${startMonth} ${startYear}`
-                case 'week':
-                case '4day':
-                  return `${startMonth} ${startDay} ${startYear} - ${suffixMonth} ${endDay} ${suffixYear}`
-                case 'day':
-                  return `${startMonth} ${startDay} ${startYear}`
-              }
-              return ''
-            },
-            
-            monthFormatter () {
-              return this.$refs.calendar.getFormatter({
-                timeZone: 'UTC', month: 'long',
-              })
-            },
+methods: {
+  pushtest(e){
+          
+      rand=Math.floor(Math.random() * 1000);
+      this.events.push({
+        name: 'New Event',
+        start: '2019-11-27',
+        end: "2019-11-29",
+        color: '#'+rand,
+        details: 'No',
+      })
+    },
+      viewDay ({ date }) {
+        this.focus = date
+        this.type = 'day'
+      },
+      getEventColor (event) {
+        return event.color
+      },
+      setToday () {
+        this.focus = this.today
+      },
+      prev () {
+        this.$refs.calendar.prev()
+      },
+      next () {
+        this.$refs.calendar.next()
+      },
+      showEvent ({ nativeEvent, event }) {
+        const open = () => {
+          this.selectedEvent = event
+          this.selectedElement = nativeEvent.target
+          setTimeout(() => this.selectedOpen = true, 10)
+        }
+        if (this.selectedOpen) {
+          this.selectedOpen = false
+          setTimeout(open, 10)
+        } else {
+          open()
+        }
+        nativeEvent.stopPropagation()
+      },
 
-          },
-                       
+      updateRange ({ start, end }) {
+        // You could load events from an outside source (like database) now that we have the start and end dates on the calendar
+        this.start = start
+        this.end = end
+      },
+
+      nth (d) {
+        return d > 3 && d < 21
+          ? 'th'
+          : ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'][d % 10]
+      },
+  },
+}
 
 
-            methods: {
-              pushtest(e){
-                
-                rand=Math.floor(Math.random() * 1000);
-                this.events.push({
-                  name: 'New Event',
-                  start: '2019-11-27',
-                  end: "2019-11-29",
-                  color: '#'+rand,
-                  details: 'No',
-                })
-              },
-                viewDay ({ date }) {
-                  this.focus = date
-                  this.type = 'day'
-                },
-                getEventColor (event) {
-                  return event.color
-                },
-                setToday () {
-                  this.focus = this.today
-                },
-                prev () {
-                  this.$refs.calendar.prev()
-                },
-                next () {
-                  this.$refs.calendar.next()
-                },
-                showEvent ({ nativeEvent, event }) {
-                  const open = () => {
-                    this.selectedEvent = event
-                    this.selectedElement = nativeEvent.target
-                    setTimeout(() => this.selectedOpen = true, 10)
-                  }
-                  if (this.selectedOpen) {
-                    this.selectedOpen = false
-                    setTimeout(open, 10)
-                  } else {
-                    open()
-                  }
-                  nativeEvent.stopPropagation()
-                },
-
-                updateRange ({ start, end }) {
-                  // You could load events from an outside source (like database) now that we have the start and end dates on the calendar
-                  this.start = start
-                  this.end = end
-                },
-
-                nth (d) {
-                  return d > 3 && d < 21
-                    ? 'th'
-                    : ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'][d % 10]
-                },
-            },}
-
+//PATH
 const Subscribe={template:'<div class="white">Subscribe2</div>'}
 const Food ={template:'<div class="white">FOOD!!</div>'}
 
