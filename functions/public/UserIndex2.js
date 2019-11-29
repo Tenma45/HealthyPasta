@@ -180,9 +180,11 @@ const Course2={template:`<v-container>
 
           <v-col col="12" sm="2">
           <v-card-actions>
+            <v-row>
+                
               <v-dialog v-model="sche" width="500" >
                   <template v-slot:activator="{ on }">
-                      <v-btn color="#FDA50B"  x-large class="mx-auto" outlined depressed tile v-on="on" >
+                      <v-btn color="#FDA50B"  x-large class="mx-auto" depressed v-on="on" >
                           <span class="subtitle-1 font-weight-bold" >กำหนดการ</span>
                       </v-btn>
                   </template>
@@ -192,6 +194,31 @@ const Course2={template:`<v-container>
                     </v-card-text>
                 </v-card>
               </v-dialog>
+              <br/>
+              <br/>
+              <br/>
+              
+              <v-dialog v-model="cancel" width="500" >
+                <template v-slot:activator="{ on }">
+                    <v-btn color="#FDA50B" rounded  class="mx-auto" outlined depressed v-on="on" width=100 >
+                        <span class="subtitle-1 font-weight-bold" >ยกเลิก</span>
+                    </v-btn>
+                </template>
+                <v-card >
+                    <v-card-text class="black--text pt-5 text-center">
+                        <span style="font-size: 24px;">คุณยืนยันที่จะยกเลิก Course นี้ ใช่หรือไม่?</span>
+                        <div><v-icon size=120 color="#FDA50B">warning</v-icon></div>
+                        <v-card-actions>
+                                <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined>
+                                    ยกเลิก
+                                </v-btn>
+                                <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined >
+                                    ยืนยัน
+                                </v-btn>
+                        </v-card-actions>
+                </v-dialog>
+               
+            </v-row>
           </v-card-actions>
           </v-col>
       </v-row>
@@ -223,6 +250,7 @@ new Vue({
             choose:false, //ส่วนที่เพิ่มมา
             sche:false, //ส่วนที่เพิ่มมา
             trainerinfo:false, //ส่วนที่เพิ่มมา
+            cancel:false,
             
         }
     },
