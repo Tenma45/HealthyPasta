@@ -6,28 +6,34 @@ const cookieParser = require('cookie-parser')
 const expressValidator = require('express-validator')
 const session = require('express-session')
 const app = express();
-var firebase = require('firebase-admin');
-var serviceAccount = require('./serviceAccountKey.json')
+const firebase = require('firebase-admin');
+const serviceAccount = require('./serviceAccountKey.json')
+const FirebaseStore = require('connect-session-firebase')(session);
 
-app.use(cookieParser('sign'))
-app.use(bodyParser());
-//app.use(expressValidator());
-app.use(session({ saveUninitialized: false, resave: false}))
-
-firebase.initializeApp({
+const ref = firebase.initializeApp({
     credential: firebase.credential.cert(serviceAccount),
     databaseURL: 'https://realtimeapp-b69e4.firebaseio.com'
   });
-  
-const database = firebase.database();
-const memberref = database.ref('member')
+
+app.use(cookieParser('HTP'))
+app.use(bodyParser());
+//app.use(expressValidator());
+app.use(session({ secret:'HTP', saveUninitialized: false, resave: false}))
+app.use(session({
+    store: new FirebaseStore({
+      database: ref.database()
+    }),
+    name: '__session',
+    secret: 'HTP',
+    resave: true,
+    saveUninitialized: true
+  }));
+
+const fdatabase = firebase.database();
+const memberref = fdatabase.ref('member')
 
 app.get('/',(req,res)=>{
-        res.redirect('/home')
-})
-
-app.get('/home',(req,res)=>{
-    
+    res.cookie("TEST",req.session.role,{maxAge:60000})
     if(req.session.username){
         if(req.session.role=="client"){
             res.sendFile(path.join(__dirname,'/public/UserIndex.html'));
@@ -40,6 +46,7 @@ app.get('/home',(req,res)=>{
         }
     }
     else {
+        console.log("NOID")
         res.sendFile(path.join(__dirname,'/public/home.html'));
     }
 })
@@ -58,6 +65,7 @@ app.post('/login',(req,res)=>{
             if(snapshot.child(req.body.username).child("password").val()==req.body.password){
                 req.session.username=req.body.username
                 req.session.role=snapshot.child(req.body.username).child("role").val()
+                res.cookie("TEST0",req.session.username,{maxAge:60000})
                 res.redirect('/')
             }
             else{
@@ -71,8 +79,8 @@ app.post('/login',(req,res)=>{
 })
 
 app.get('/logout',(req,res)=>{
-    req.session.username=null;
-    req.session.role=null;
+    delete req.session.username
+    delete req.session.role
     res.redirect('/')
 })
 
