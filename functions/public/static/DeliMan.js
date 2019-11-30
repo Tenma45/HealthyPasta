@@ -256,7 +256,9 @@ data (){
 const router=new VueRouter ({
     routes : [
         {path:'/request', component:Request},
-        {path:'/reqmanage', component:Reqmanage},  
+        {path:'/reqmanage', component:Reqmanage},
+        {path:'/message', component:{template:'<div align="center" class="white--text " style="font-size: 50px; margin-top: 150px;"><v-icon color="white" size="100">error</v-icon>&nbsp;Sorry! This page not available.</div>'}},
+        {path:'/setting', component:{template:'<div align="center" class="white--text " style="font-size: 50px; margin-top: 150px;"><v-icon color="white" size="100">error</v-icon>&nbsp;Sorry! This page not available.</div>'}},  
     ]
 })
 
