@@ -11,7 +11,9 @@ new Vue({
             closeOnContentClick:false,
             calendar:false,
             choose:false,
+            dialog: false,
 
+      
 
       today: "today",
       focus: "today",
@@ -22,6 +24,9 @@ new Vue({
         day: 'Day',
         '4day': '4 Days',
       },
+
+      //calendar date input
+      dates: ['2019-11-30', '2019-11-30'],
 
       start: null,
       end: null,
@@ -47,6 +52,30 @@ new Vue({
                   },
                 
               ],
+
+              valid: true,
+              Title: '',
+              TitleRules: [
+                v => !!v || 'Title is required',
+                v => (v && v.length <= 30) || 'Title must be less than 30 characters',
+              ],
+              Des: '',
+              DesRules: [
+                v => !!v || 'Description is required',
+              ],
+              Start: '',
+              StartRules: [
+                v => !!v || 'Start Date is required',
+              ],
+              End: '',
+              EndRules: [
+                v => !!v || 'End Date is required',
+              ],
+              select: null,
+              
+            checkbox: false,
+          
+
             }
         }, //ปิดของ data
             
@@ -86,11 +115,18 @@ new Vue({
               })
             },
 
+            //calendar
+            dateRangeText () {
+              return this.dates.join(' ~ ')
+            },
+
           },
-                       
+
+                              
 
 
             methods: {
+              
               pushtest(e){
                 
                 rand=Math.floor(Math.random() * 1000);
@@ -144,6 +180,20 @@ new Vue({
                     ? 'th'
                     : ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'][d % 10]
                 },
+
+                validate () {
+                  if (this.$refs.form.validate()) {
+                    this.snackbar = true
+                  }
+                },
+                reset () {
+                  this.$refs.form.reset()
+                },
+                resetValidation () {
+                  this.$refs.form.resetValidation()
+                },
+
+                
             },
 
             

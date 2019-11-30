@@ -125,6 +125,7 @@
                                     <v-col col="8" sm="3">
                                     <v-card-actions>
                                         <v-dialog v-model="calendar" width="800" >
+
                                             <template v-slot:activator="{ on }">
                                                 <v-btn color="#FDA50B"  x-large class="mx-auto" outlined depressed v-on="on" >
                                                     <span class="title font-weight-bold" >กำหนดการ</span>
@@ -147,6 +148,100 @@
                                                       
                                                       <v-toolbar-title>{{ title }}</v-toolbar-title>
                                                       <v-spacer></v-spacer>
+
+                                                        <v-btn color = "black" 
+                                                        @click.stop="dialog = true">
+                                                            <span style="color: orange;"
+                                                            >Add</span>
+                                                        </v-btn>&nbsp;&nbsp;
+
+                                                        <v-dialog
+                                                            v-model="dialog"
+                                                            max-width="850"
+                                                        >
+                                                            <v-card>
+                                                                <v-card-title class="headline">
+                                                                    Add activity
+                                                                </v-card-title>
+
+                                                                <v-card-text>
+                                                                    <v-form
+                                                                        ref="form"
+                                                                        v-model="valid"
+                                                                        lazy-validation
+                                                                    >
+                                                                    <v-text-field
+                                                                        v-model="Title"
+                                                                        :counter="30"
+                                                                        :rules="TitleRules"
+                                                                        label="Title"
+                                                                        required
+                                                                    ></v-text-field>
+
+                                                                    <v-text-field
+                                                                        v-model="Des"
+                                                                        :rules="DesRules"
+                                                                        label="Description"
+                                                                        required
+                                                                    ></v-text-field>
+
+                                                                    
+
+    <!--calendar-->
+
+    <v-row>
+            
+            <v-col cols="12" sm="0">
+              <v-text-field v-model="dateRangeText" label="Date range" prepend-icon="event" readonly></v-text-field>
+              model: {{ dates }}
+            </v-col>
+            <v-col cols="12" sm="0" >
+                <v-date-picker v-model="dates" range></v-date-picker>
+            </v-col>
+    </v-row>
+
+
+
+    <v-checkbox
+      v-model="checkbox"
+      :rules="[v => !!v || 'You must agree to continue!']"
+      label="Do you agree?"
+      required
+    ></v-checkbox>
+
+    <v-btn
+      color="error"
+      class="mr-4"
+      @click="reset"
+    >
+      Reset Activity
+    </v-btn>
+
+                                                            </v-form>
+                                                            </v-card-text>
+
+                                                            <v-card-actions>
+                                                            <v-spacer></v-spacer>
+                                                            <v-btn
+                                                                color="black"
+                                                                text
+                                                                @click="dialog = false"
+                                                            >
+                                                                ยกเลิก
+                                                            </v-btn>
+
+                                                            <v-btn
+                                                                color="black"
+                                                                text
+                                                                @click="dialog = false"
+                                                            >
+                                                                ยืนยัน
+                                                            </v-btn>
+                                                            </v-card-actions>
+                                                        </v-card>
+                                                    </v-dialog>
+
+                                                        
 
                                                       <v-menu bottom right>
                                                             <template v-slot:activator="{ on }">
@@ -192,7 +287,9 @@
                                                   @change="updateRange"
 
                                                 ></v-calendar>
+
                                                 <v-btn @click="pushtest()">TEST PUSH</v-btn>
+                                                
                                                 <v-menu
                                                     v-model="selectedOpen"
                                                     :close-on-content-click="false"
