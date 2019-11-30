@@ -95,9 +95,8 @@ new Vue({
             loginPass:false,
             loginError:'',
             loginErrorTrap:false,
-            logintrap:false,
-            passwordtrap:false,
-
+            duplicateTrap:false,
+            deplicate:false,
             e1:1,
             choose2:false,
             required: function(v) { return v.length >0 || "This field is required"}, 
@@ -118,8 +117,18 @@ new Vue({
                 e.preventDefault();
               }
          },
-        submit1 (e) {
-            if (this.$refs.form0.validate()){
+        async submit1 (e) {
+          e.preventDefault()
+          try{
+            const res = await axios.post('/checkuser',{
+              username: this.username,
+            })
+            this.duplicate = res.data.duplicate
+            this.duplicateTrap = res.data.duplicate
+          }catch (err){
+              console.log(err)
+          }
+            if (this.$refs.form0.validate()&&!this.duplicate){
                 this.firstname= ''
                 this.lastname= ''
                 this.bod= ''
@@ -132,9 +141,6 @@ new Vue({
                 this.e1=2; 
                return true;
               } 
-              else {
-                  e.preventDefault();
-              }
           },
        cancel (e) {
             this.username= ''

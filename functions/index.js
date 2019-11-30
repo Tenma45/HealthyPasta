@@ -70,7 +70,6 @@ app.post('/checklogin',(req,res)=>{
             if(snapshot.child(req.body.username).child("password").val()==req.body.password){
                 req.session.username=req.body.username
                 req.session.role=snapshot.child(req.body.username).child("role").val()
-                console.log("USERNAME TRUE")
                 pass = true
                 res.json({pass:pass,error:error})       
             }
@@ -84,6 +83,20 @@ app.post('/checklogin',(req,res)=>{
             res.json({pass:pass,error:error}) 
         }
     })  
+})
+
+app.post('/checkuser',(req,res)=>{
+    let duplicate = false
+    memberref.once("value", function(snapshot) {
+        if(snapshot.child(req.body.username).exists()){
+                duplicate = true
+                res.json({duplicate:duplicate})       
+            }
+            else{
+                
+                res.json({duplicate:duplicate}) 
+            }
+        })  
 })
 
 app.post('/login',(req,res)=>{
