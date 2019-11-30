@@ -755,6 +755,8 @@ const router=new VueRouter ({
       {path:'/request', component:request},
       {path:'/cmanage', component:cmanage},
       {path:'/editprofile', component:EditProfile},
+      {path:'/message', component:{template:'<div align="center" class="white--text " style="font-size: 50px; margin-top: 150px;"><v-icon color="white" size="100">error</v-icon>&nbsp;Sorry! This page not available.</div>'}},
+      {path:'/setting', component:{template:'<div align="center" class="white--text " style="font-size: 50px; margin-top: 150px;"><v-icon color="white" size="100">error</v-icon>&nbsp;Sorry! This page not available.</div>'}},
       
   ]
 })

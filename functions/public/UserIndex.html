@@ -54,8 +54,8 @@
                             <v-list-item :to="{path:'/editprofile'}">Edit Profile</v-list-item> <!-- เมนู Edit profile กับ Subscribe อยู่ใต้ Manage-->
                             <v-list-item :to="{path:'/subscribe'}">Subscribe</v-list-item>
                             </v-list-group> <!--group เมนู manage account-->
-                            <v-list-item @click='' >Message</v-list-item> <!--เมนู ข้อความ -->
-                            <v-list-item @click=''>Setting</v-list-item><!--เมนู ตั้งค่า -->
+                            <v-list-item :to="{path:'/message'}" >Message</v-list-item> <!--เมนู ข้อความ -->
+                            <v-list-item :to="{path:'/setting'}">Setting</v-list-item><!--เมนู ตั้งค่า -->
                             <v-list-item href="/logout" @click=''><v-icon >exit_to_app</v-icon>&nbsp; Logout</v-list-item> <!--เมนู logout-->
                         </v-list>
                 </v-menu>
