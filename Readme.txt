@@ -1,1 +1,4 @@
-Testing Readme 4
+cd ./functions
+npm install
+cd ..
+firebase serve

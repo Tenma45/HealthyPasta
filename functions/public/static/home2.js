@@ -66,7 +66,7 @@ const router=new VueRouter ({
     routes : [
         {path:'', component:Home},
         {path:'/home', component:Home},
-        {path:'/course', component:Course},
+        {path:'/course', component:this.CourseState2},
         {path:'/food', component:{template:'<div align="center" class="white--text " style="font-size: 50px; margin-top: 150px;"><v-icon color="white" size="100">error</v-icon>&nbsp;Sorry! This page not available.</div>'}},
         {path:'/exercise', component:{template:'<div align="center" class="white--text " style="font-size: 50px; margin-top: 150px;"><v-icon color="white" size="100">error</v-icon>&nbsp;Sorry! This page not available.</div>'}},
     ]

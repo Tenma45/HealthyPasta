@@ -114,7 +114,7 @@ app.get('/error',(req,res)=>{
     res.sendFile(path.join(__dirname,'/public/404.html'));
 })
 
-app.listen(process.env.port||5000,()=>{
+app.listen(process.env.port||6000,()=>{
     console.log("Server is on");
 })
 

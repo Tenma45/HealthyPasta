@@ -935,14 +935,14 @@ data : ()=>({
 }
 
 const Food ={template:'<div class="white">FOOD!!</div>'}
-
-const router=new VueRouter ({
+var TEST = Course
+const router = new VueRouter ({
     routes : [
         {path:'', component:Home},
         {path:'/home', component:Home},
         {path:'/editprofile', component:EditProfile},
         {path:'/subscribe', component:Subscribe},
-        {path:'/course', component:Course},
+        {path:'/course', component:TEST},
         {path:'/course2', component:Course2},
         {path:'/coursewait', component:CourseWait},
         {path:'/food', component:{template:'<div align="center" class="white--text " style="font-size: 50px; margin-top: 150px;"><v-icon color="white" size="100">error</v-icon>&nbsp;Sorry! This page not available.</div>'}},
