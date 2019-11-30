@@ -466,7 +466,249 @@ methods: {
 
 
 //PATH
-const Subscribe={template:'<div class="white">Subscribe2</div>'}
+const Subscribe={template:`<div style="background-color: #FDA50B;">
+<v-container>
+<div class="black--text" style="text-decoration: underline; font-size: 35px;" > ต่ออายุสมาชิก</div>
+<br/>
+<div class="black--text" style="font-size: 20px;" > วันหมดอายุ : 14/06/2020</div>
+<br/>
+<br/>
+<v-card color="#FDA50B" outlined  max-width="1200">
+    <v-row>
+
+    <!-- card 1 -->
+    <v-col
+        cols="12"
+        sm="4"
+    >
+        <v-hover v-slot:default="{ hover }">
+            <v-card
+                class="mx-auto"
+                color="grey lighten-4"
+                max-width="300"
+                style="box-shadow: 5px 5px 20px;"
+                
+            >
+                  <v-img
+                    :aspect-ratio="4/3"
+                    src="./pic/s1.png"
+                  >
+                    <v-expand-transition>
+                      <div
+                        v-if="hover"
+                        class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal display-3 white--text"
+                        style="height: 100%;  opacity: 70%; "
+                      >
+                        <span style="margin-top: 70px; margin-left: 40px;">รายเดือน</span>
+                      </div>
+                    </v-expand-transition>
+                  </v-img>
+                  
+                  <v-card-text
+                    class="pt-6"
+                    style="position: relative;"
+                  >
+                    
+                    <div class="font-weight-light grey--text title mb-2" style="text-align: center" >สมัครสมาชิกแบบรายเดือน</div>
+                    <h3 class="display-1 font-weight-light orange--text mb-2" style="text-align: center" >300 บาท/เดือน</h3>
+                    <div class="font-weight-light title mb-2" style="text-align: center">
+                    <br/>
+                    <br/>
+                    </div>
+                    <v-dialog v-model="payment" width="800" >
+                        <template v-slot:activator="{ on }">
+                            <div align="center">
+                                <v-btn
+                                  color="orange"
+                                  class="white--text"
+                                  width=250                                                      
+                                  large
+                                  v-on="on"
+                                  style="font-size: 20px;"
+                                >
+                                    เลือก
+                            </div>
+                        </template>
+
+                        <v-card >
+                                <v-card-text class="black--text pt-5 text-center">
+                                    <span style="font-size: 24px;">โปรดเลือกช่องทางการชำระเงิน</span>
+                                    <v-card-actions>
+                                            <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined >
+                                                บัตรเครดิต
+                                            </v-btn>
+                                            <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined >
+                                                Paypal
+                                            </v-btn>
+                                    </v-card-actions>
+                                </v-card-text>
+                        </v-card>
+                        
+                    </v-dialog>
+                   
+                </v-card-text>
+                
+            </v-card>
+        </v-hover>
+    </v-col>
+
+    <!-- card 2 -->
+    <v-col
+        cols="12"
+        sm="4"
+    >
+        <v-hover v-slot:default="{ hover }">
+            <v-card
+                class="mx-auto"
+                color="grey lighten-4"
+                max-width="300"
+                style="box-shadow: 5px 5px 20px;"
+                
+            >
+                  <v-img
+                    :aspect-ratio="4/3"
+                    src="./pic/s2.png"
+                  >
+                    <v-expand-transition>
+                      <div
+                        v-if="hover"
+                        class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal display-3 white--text"
+                        style="height: 100%;  opacity: 70%; "
+                      >
+                        <span style="margin-top: 70px; margin-left: 30px; font-size: 50px;">รายหกเดือน</span>
+                      </div>
+                    </v-expand-transition>
+                  </v-img>
+
+                  <v-card-text
+                    class="pt-6"
+                    style="position: relative;"
+                  >
+                    
+                    <div class="font-weight-light grey--text title mb-2" style="text-align: center" >สมัครสมาชิกแบบรายหกเดือน</div>
+                    <h3 class="display-1 font-weight-light orange--text mb-2" style="text-align: center" >250 บาท/เดือน</h3>
+                    <div class="font-weight-light title mb-2" style="text-align: center">
+                    รวม 1,600 บาท 
+                    <br/> ประหยัดได้ 1 เดือน
+                    </div>
+                    <v-dialog v-model="payment" width="800" >
+                        <template v-slot:activator="{ on }">
+                            <div align="center">
+                                <v-btn
+                                  color="orange"
+                                  class="white--text"
+                                  width=250                                                      
+                                  large
+                                  v-on="on"
+                                  style="font-size: 20px;"
+                                >
+                                    เลือก
+                            </div>
+                        </template>
+
+                        <v-card >
+                            <v-card-text class="black--text pt-5 text-center">
+                                <span style="font-size: 24px;">โปรดเลือกช่องทางการชำระเงิน</span>
+                                <v-card-actions>
+                                        <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined >
+                                            บัตรเครดิต
+                                        </v-btn>
+                                        <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined >
+                                            Paypal
+                                        </v-btn>
+                                </v-card-actions>
+                            </v-card-text>
+                        </v-card>
+
+                    </v-dialog>
+                   
+                </v-card-text>
+                
+            </v-card>
+        </v-hover>
+    </v-col>
+
+    <!-- card 3 -->
+    <v-col
+        cols="12"
+        sm="4"
+    >
+        <v-hover v-slot:default="{ hover }">
+            <v-card
+                class="mx-auto"
+                color="grey lighten-4"
+                max-width="300"
+                style="box-shadow: 5px 5px 20px;"
+                
+            >
+                  <v-img
+                    :aspect-ratio="4/3"
+                    src="./pic/s3.png"
+                  >
+                    <v-expand-transition>
+                      <div
+                        v-if="hover"
+                        class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal display-3 white--text"
+                        style="height: 100%;  opacity: 70%; "
+                      >
+                        <span style="margin-top: 70px; margin-left: 90px;">รายปี</span>
+                      </div>
+                    </v-expand-transition>
+                  </v-img>
+                  <v-card-text
+                    class="pt-6"
+                    style="position: relative;"
+                  >
+                    
+                    <div class="font-weight-light grey--text title mb-2" style="text-align: center" >สมัครสมาชิกแบบรายปี</div>
+                    <h3 class="display-1 font-weight-light orange--text mb-2" style="text-align: center" >200 บาท/เดือน</h3>
+                    <div class="font-weight-light title mb-2" style="text-align: center">
+                    รวม 2,400 บาท 
+                    <br/> ประหยัดได้ 4 เดือน
+                    </div>
+                    <v-dialog v-model="payment" width="800" >
+                        <template v-slot:activator="{ on }">
+                            <div align="center">
+                                <v-btn
+                                  color="orange"
+                                  class="white--text"
+                                  width=250                                                      
+                                  large
+                                  v-on="on"
+                                  style="font-size: 20px;"
+                                >
+                                    เลือก
+                            </div>
+                        </template>
+                        <v-card >
+                            <v-card-text class="black--text pt-5 text-center">
+                                <span style="font-size: 24px;">โปรดเลือกช่องทางการชำระเงิน</span>
+                                <v-card-actions>
+                                        <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined >
+                                            บัตรเครดิต
+                                        </v-btn>
+                                        <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined >
+                                            Paypal
+                                        </v-btn>
+                                </v-card-actions>
+                            </v-card-text>
+                        </v-card>
+                    </v-dialog>
+                   
+                </v-card-text>
+                
+            </v-card>
+        </v-hover>
+    </v-col>
+
+    </v-row>
+   
+  </v-card>
+  
+</v-container>
+</div>`
+}
+
 const Food ={template:'<div class="white">FOOD!!</div>'}
 
 const router=new VueRouter ({
