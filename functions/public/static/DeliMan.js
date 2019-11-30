@@ -118,7 +118,7 @@ const Request={template:`
         choose:false,
         foods: [
             {
-              name: 'เกาเหลาเส้นบุก',
+              name: 'เกาเหลาเส้นใหญ่',
               cost: 950,
               count: 1,
               totalcost: 950,
@@ -236,7 +236,7 @@ data (){
         choose:false,
         foods: [
             {
-              name: 'เกาเหลาเส้นบุก',
+              name: 'เกาเหลาเส้นใหญ่',
               cost: 950,
               count: 1,
               totalcost: 950,
@@ -273,7 +273,7 @@ new Vue({
             choose:false,
             foods: [
                 {
-                  name: 'เกาเหลาเส้นบุก',
+                  name: 'เกาเหลาเส้นใหญ่',
                   cost: 950,
                   count: 1,
                   totalcost: 950,

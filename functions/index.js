@@ -15,6 +15,8 @@ const ref = firebase.initializeApp({
     databaseURL: 'https://realtimeapp-b69e4.firebaseio.com'
   });
 
+app.use("/static", express.static('./public/static/'));
+app.use("/static", express.static('./public/pic/'));
 app.use(cookieParser('HTP'))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
