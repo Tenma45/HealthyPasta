@@ -101,6 +101,8 @@ new Vue({
             height: '',
             login:false,
             register:false,
+            logintrap:false,
+            passwordtrap:false,
 
             e1:1,
             choose2:false,
