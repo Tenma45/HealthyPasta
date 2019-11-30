@@ -57,13 +57,18 @@ const Course={template:`<v-container>
             </v-col>
         </v-row>
     </v-card-text>
-  </v-card></v-container>`}
+  </v-card></v-container>`,data: ()=>({
+    choose2: false
+  })
+}
 
 const router=new VueRouter ({
     routes : [
         {path:'', component:Home},
         {path:'/home', component:Home},
         {path:'/course', component:Course},
+        {path:'/food', component:{template:'<div></div>'}},
+        {path:'/exercise', component:{template:'<div></div>'}},
     ]
 })
 
@@ -89,6 +94,7 @@ new Vue({
             register:false,
             loginPass:false,
             loginError:'',
+            loginErrorTrap:false,
             logintrap:false,
             passwordtrap:false,
 
@@ -176,6 +182,7 @@ new Vue({
               console.log(err)
           }
           if(this.loginPass)document.loginForm.submit();
+          else{this.loginErrorTrap=true}
           
         }
 

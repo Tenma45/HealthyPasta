@@ -937,8 +937,6 @@ const router=new VueRouter ({
         {path:'/course', component:Course},
         {path:'/course2', component:Course2},
         {path:'/coursewait', component:CourseWait},
-        {path:'/food', component:{template:'<div></div>'}},
-        {path:'/exercise', component:{template:'<div></div>'}},
     ]
 })
 
