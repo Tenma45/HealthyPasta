@@ -341,6 +341,8 @@ const Course2={template:`<v-container>
                                     ยืนยัน
                                 </v-btn>
                         </v-card-actions>
+                        </v-card-text>
+                      <v-card>
                 </v-dialog>
                
             </v-row>
@@ -744,6 +746,7 @@ const Subscribe={template:`<div style="background-color: #FDA50B;">
                                   style="font-size: 20px;"
                                 >
                                     เลือก
+                                    </v-btn>
                             </div>
                         </template>
 
@@ -820,6 +823,7 @@ const Subscribe={template:`<div style="background-color: #FDA50B;">
                                   style="font-size: 20px;"
                                 >
                                     เลือก
+                                </v-btn>
                             </div>
                         </template>
 
@@ -895,6 +899,7 @@ const Subscribe={template:`<div style="background-color: #FDA50B;">
                                   style="font-size: 20px;"
                                 >
                                     เลือก
+                                    </v-btn>
                             </div>
                         </template>
                         <v-card >
@@ -923,7 +928,10 @@ const Subscribe={template:`<div style="background-color: #FDA50B;">
   </v-card>
   
 </v-container>
-</div>`
+</div>`,
+data : ()=>({
+  payment:false
+})
 }
 
 const Food ={template:'<div class="white">FOOD!!</div>'}
