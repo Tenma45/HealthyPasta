@@ -223,9 +223,13 @@ new Vue({
             choose:false, //ส่วนที่เพิ่มมา
             sche:false, //ส่วนที่เพิ่มมา
             trainerinfo:false, //ส่วนที่เพิ่มมา
+            payment:false,
             
         }
     },
+
+    
+
     methods: {
 
     }
