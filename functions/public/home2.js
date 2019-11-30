@@ -89,7 +89,8 @@ new Vue({
             register:false,
             loginPass:false,
             loginError:'',
-            wait:true,
+            logintrap:false,
+            passwordtrap:false,
 
             e1:1,
             choose2:false,
