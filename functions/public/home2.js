@@ -73,20 +73,6 @@ new Vue({
     vuetify: new Vuetify(),
     data : function () {
         return {
-            items: [
-              {
-                src: '/pic/slider-1.png',
-              },
-              {
-                src: '/pic/slider-2.png',
-              },
-              {
-                src: '/pic/slider-3.png',
-              },
-              {
-                src: '/pic/slider-4.png',
-              },
-            ],
             username: '',
             password: '',
             cfpassword: '',
@@ -101,6 +87,9 @@ new Vue({
             height: '',
             login:false,
             register:false,
+            loginPass:false,
+            loginError:'',
+            wait:true,
 
             e1:1,
             choose2:false,
@@ -173,10 +162,21 @@ new Vue({
             this.weight= '100',
             this.height= '100'
         },
-        loginOn (e){
-            axios.post('/checkuser')
-            .then(res=>console.log(res))
-            .catch(error=>console.log(error))
+        async checklogin (e){
+          e.preventDefault()
+          try{
+            const res = await axios.post('/checklogin',{
+              username: this.username,
+              password: this.password
+            })
+           this.loginPass = res.data.pass
+           this.loginError = res.data.error
+          }catch (err){
+              console.log(err)
+          }
+          if(this.loginPass)document.loginForm.submit();
+          
         }
+
     }
 })

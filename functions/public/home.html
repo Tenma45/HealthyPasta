@@ -146,14 +146,14 @@
                     <div style="padding-top: 30px; text-align: center;"><b style="font-size: 24px;">Login to Healthy Pasta</b></div>
                     <v-card-text class="pt-5">
                       
-                      <v-form ref="login" action="/login" method="post">
+                      <v-form ref="login" name="loginForm" action="/login" method="post">
                         <b style="font-size:larger;">Username</b>
                         <v-text-field :maxlength=12 :rules="[required,minimum]" name="username" v-model="username" outlined ></v-text-field>
                         <b style="font-size:larger;">Password</b>
                         <v-text-field :maxlength=12 :rules="[required,minimum]" name="password" v-model="password" :type="'password'" outlined ></v-text-field>
                         
                         <v-card-actions>
-                            <v-btn type="submit" color="#FDA50B" class="mx-auto" large >
+                            <v-btn type="submit" @click="checklogin" color="#FDA50B" class="mx-auto" large >
                                 LOGIN
                             </v-btn>
                         </v-card-actions>

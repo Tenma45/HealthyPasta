@@ -16,7 +16,10 @@ const ref = firebase.initializeApp({
   });
 
 app.use(cookieParser('HTP'))
-app.use(bodyParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+  }));
 //app.use(expressValidator());
 app.use(session({ secret:'HTP', saveUninitialized: false, resave: false}))
 app.use(session({
@@ -33,20 +36,18 @@ const fdatabase = firebase.database();
 const memberref = fdatabase.ref('member')
 
 app.get('/',(req,res)=>{
-    res.cookie("TEST",req.session.role,{maxAge:60000})
     if(req.session.username){
         if(req.session.role=="client"){
             res.sendFile(path.join(__dirname,'/public/UserIndex.html'));
         }
-        if(req.session.role=="trainer"){
+        else if(req.session.role=="trainer"){
             res.sendFile(path.join(__dirname,'/public/TrainerIndex.html'));
         }
-        if(req.session.role=="fdm"){
+        else if(req.session.role=="fdm"){
             res.sendFile(path.join(__dirname,'/public/DeliMan.html'));
         }
     }
     else {
-        console.log("NOID")
         res.sendFile(path.join(__dirname,'/public/home.html'));
     }
 })
@@ -59,23 +60,32 @@ app.post('/register',(req,res)=>{
     res.redirect('/')
 })
 
-app.post('/login',(req,res)=>{
+app.post('/checklogin',(req,res)=>{
+    let pass = false
+    let error = ''
     memberref.once("value", function(snapshot) {
         if(snapshot.child(req.body.username).exists()){
             if(snapshot.child(req.body.username).child("password").val()==req.body.password){
                 req.session.username=req.body.username
                 req.session.role=snapshot.child(req.body.username).child("role").val()
-                res.cookie("TEST0",req.session.username,{maxAge:60000})
-                res.redirect('/')
+                console.log("USERNAME TRUE")
+                pass = true
+                res.json({pass:pass,error:error})       
             }
             else{
-                res.redirect('/')
+                error="Incorrect password"   
+                res.json({pass:pass,error:error}) 
             }
         }
-        else{
-            res.redirect('/')   
+        else{  
+            error="Username not found"
+            res.json({pass:pass,error:error}) 
         }
-    })
+    })  
+})
+
+app.post('/login',(req,res)=>{
+   res.redirect('/')
 })
 
 app.get('/logout',(req,res)=>{

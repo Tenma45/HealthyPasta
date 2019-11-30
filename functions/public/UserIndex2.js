@@ -1,3 +1,30 @@
+const Home={template:`
+<v-container> 
+<template>
+  <v-carousel>
+    <v-carousel-item v-for="(item,i) in items" :key="i">
+      <v-img :src="item.src"></v-img>
+    </v-carousel-item>
+  </v-carousel>
+</template>
+</v-container>`,
+data: () => ({
+  items: [
+    {
+      src: '/pic/slider-1.png',
+    },
+    {
+      src: '/pic/slider-2.png',
+    },
+    {
+      src: '/pic/slider-3.png',
+    },
+    {
+      src: '/pic/slider-4.png',
+    },
+  ]
+})}
+
 const EditProfile={template:'<div style="background-color: #FDA50B;">\
 <v-container>\
     <div style="font-size: 28px;">\
@@ -231,6 +258,8 @@ const Food ={template:'<div class="white">FOOD!!</div>'}
 
 const router=new VueRouter ({
     routes : [
+        {path:'', component:Home},
+        {path:'/home', component:Home},
         {path:'/editprofile', component:EditProfile},
         {path:'/subscribe', component:Subscribe},
         {path:'/course', component:Course},
