@@ -17,7 +17,7 @@
             <v-app-bar app color="black" height=150>
                 <img src="./pic/LogoHP-Dark.png" height="175">
                 <v-btn color="white" depressed x-large :to="{path:'/home'}">Home</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่ม home-->
-                <v-btn color="white" depressed text x-large :to="{path:'/course'}">Courses</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่มคอร์ส-->
+                <v-btn color="white" depressed text x-large @click="fetchstatus" >Courses</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่มคอร์ส-->
                 <v-btn color="white" depressed text x-large :to="{path:'/food'}">Foods</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่มอาหาร-->
                 <v-btn color="white" depressed text x-large :to="{path:'/exercise'}">Exercises</v-btn> <!--ปุ่มออกกำลังกาย-->
                 <v-spacer></v-spacer>
@@ -63,7 +63,8 @@
 
             <v-content> 
                 <!--<my-component>{{testing}}</my-component>-->
-                <router-view :items="items" :info="info" :not="NotAvaliable"></router-view>
+                <router-view :items="items" :info="info" :not="NotAvaliable" :courseinfo="courseinfo" :addrequest="addrequest" 
+                :wait="wait" :removerequest="removerequest"></router-view>
             </v-content>
               
         </v-app>

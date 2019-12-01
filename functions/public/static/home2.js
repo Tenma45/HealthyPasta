@@ -29,13 +29,13 @@ const Course={template:`<v-container>
 <div class="white--text" style="text-decoration: underline; font-size: 24px;" > เลือก Course ที่ใช่ด้วยใจที่ชอบ</div>
 <v-card color="black" outlined  max-width="1200">
   <v-card-text class="white--text subtitle-1">
-        <v-row>
+        <v-row v-for="(course,i) in courseinfo" :key="i">
             <v-col col="12" sm="3">
-                <div class="text-center"><img src="./pic/no-image-available-icon-6.jpg" height="150"></div>
+                <div class="text-center"><img :src="course.pic" height="150"></div>
             </v-col>
 
             <v-col col="12" sm="7">
-            รายละเอียด : คอร์สนี้เป็นบลาๆสำหรับที่จะทำนู่นนี่นั่นเพื่อที่จะทำให้ร่างกายแข็งแรงและมีสุขภาพที่ดีเหมือนคนอื่นๆทั่วไป
+              {{course.detail}}
             </v-col>
 
             <v-col col="12" sm="2">
@@ -57,7 +57,9 @@ const Course={template:`<v-container>
             </v-col>
         </v-row>
     </v-card-text>
-  </v-card></v-container>`,data: ()=>({
+  </v-card></v-container>`,
+  props:["courseinfo"]
+  ,data: ()=>({
     choose2: false
   })
 }
@@ -66,7 +68,7 @@ const router=new VueRouter ({
     routes : [
         {path:'', component:Home},
         {path:'/home', component:Home},
-        {path:'/course', component:this.CourseState2},
+        {path:'/course', component:Course},
         {path:'/food', component:{template:'<div align="center" class="white--text " style="font-size: 50px; margin-top: 150px;"><v-icon color="white" size="100">error</v-icon>&nbsp;Sorry! This page not available.</div>'}},
         {path:'/exercise', component:{template:'<div align="center" class="white--text " style="font-size: 50px; margin-top: 150px;"><v-icon color="white" size="100">error</v-icon>&nbsp;Sorry! This page not available.</div>'}},
     ]
@@ -99,6 +101,7 @@ new Vue({
             deplicate:false,
             e1:1,
             choose2:false,
+            courseinfo:[],
             required: function(v) { return v.length >0 || "This field is required"}, 
             minimum: v => v.length >=5 || "At least 5 characters",
         }   
@@ -190,7 +193,17 @@ new Vue({
           if(this.loginPass)document.loginForm.submit();
           else{this.loginErrorTrap=true}
           
-        }
+        },
+         async fetchcourse(){
+          try{
+            const res = await axios.post('/fetchcourse',{
+            })
+             this.courseinfo=res.data
+             router.push("/course")
+          }catch (err){
+              console.log(err)
+          }
+        },
 
     }
 })

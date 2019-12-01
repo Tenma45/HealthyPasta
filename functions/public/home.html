@@ -37,7 +37,7 @@
             <v-app-bar app color="black" height=150>
                 <img src="./pic/LogoHP-Dark.png" height="175">
                 <v-btn color="white" depressed x-large :to="{path:'/home'}">Home</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่ม home-->
-                <v-btn color="white" depressed text x-large :to="{path:'/course'}">Courses</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่มคอร์ส-->
+                <v-btn color="white" depressed text x-large @click="fetchcourse">Courses</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่มคอร์ส-->
                 <v-btn color="white" depressed text x-large :to="{path:'/food'}">Foods</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่มอาหาร-->
                 <v-btn color="white" depressed text x-large :to="{path:'/exercise'}">Exercises</v-btn> <!--ปุ่มออกกำลังกาย-->
                 <v-spacer></v-spacer>
@@ -165,7 +165,7 @@
 
             
             <v-content> 
-              <router-view></router-view>
+              <router-view :courseinfo="courseinfo"></router-view>
               
               <!--ต้องมีการกดปุ่มถึงจะขึ้นป๊อบอัพ-->
               <v-dialog v-model="duplicateTrap" width="300" >

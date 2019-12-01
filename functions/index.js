@@ -36,8 +36,10 @@ app.use(session({
 
 const fdatabase = firebase.database();
 const memberref = fdatabase.ref('member')
+const course = fdatabase.ref('course')
+const clientstatus = fdatabase.ref('clientstatus')
 const schedule = fdatabase.ref('schedule')
-const orderTrainer = fdatabase.ref('orderTrainer')
+const ordertrainer = fdatabase.ref('ordertrainer')
 const orderFDM = fdatabase.ref('orderFDM')
  
 app.get('/',(req,res)=>{
@@ -137,12 +139,34 @@ app.post('/updateprofile',(req,res)=>{
  })
  
  app.post('/addrequest',(req,res)=>{
-    memberref.child("/"+req.body.username).set(req.body)
-    res.redirect('/')
+    clientstatus.child("/"+req.session.username).update({coursestatus:2})
+    ordertrainer.child("/"+req.session.username).set({username:req.session.username,courseid:req.body.id})
+    res.json("")
  })
 
- app.post('/fetchstate',(req,res)=>{
-    res.redirect('/')
+ app.post('/fetchstatus',(req,res)=>{
+    clientstatus.once("value", function(snapshot) {
+        let doc = snapshot.child(req.session.username).val();
+        res.json(doc)
+     })
+ })
+
+ app.post('/fetchcourse',(req,res)=>{
+    course.once("value", function(snapshot) {
+        let doc = snapshot.val();
+        res.json(doc)
+     })
+ })
+
+ app.post('/fetchwait',(req,res)=>{
+    ordertrainer.once("value", function(snapshot) {
+        let id = snapshot.child(req.session.username).val().courseid;
+        course.once("value", function(snapshot2) {
+            let temp = '"'+id+'"'
+            let doc = snapshot2.child(temp).val()
+        res.json(doc)
+     })
+     })
  })
 
  app.post('/fetchrequest1',(req,res)=>{
@@ -182,8 +206,10 @@ app.post('/updateprofile',(req,res)=>{
  })
 
  app.post('/removerequest',(req,res)=>{
-    res.redirect('/')
- })
+    clientstatus.child("/"+req.session.username).update({coursestatus:1})
+    ordertrainer.child("/"+req.session.username).remove()
+    res.json("")
+})
 
  app.post('/doneclient',(req,res)=>{
     res.redirect('/')
