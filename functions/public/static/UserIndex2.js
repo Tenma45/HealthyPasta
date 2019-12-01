@@ -725,7 +725,7 @@ const Subscribe={template:`<div style="background-color: #FDA50B;">
                     <br/>
                     <br/>
                     </div>
-                    <v-dialog v-model="payment" width="800" >
+                    <v-dialog v-model="payment" width="400" >
                         <template v-slot:activator="{ on }">
                             <div align="center">
                                 <v-btn
@@ -742,17 +742,31 @@ const Subscribe={template:`<div style="background-color: #FDA50B;">
                         </template>
 
                         <v-card >
-                                <v-card-text class="black--text pt-5 text-center">
-                                    <span style="font-size: 24px;">โปรดเลือกช่องทางการชำระเงิน</span>
-                                    <v-card-actions>
-                                            <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined >
-                                                บัตรเครดิต
-                                            </v-btn>
-                                            <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined >
-                                                Paypal
-                                            </v-btn>
-                                    </v-card-actions>
+                                <v-card-title>กรุณากรอกรายละเอียดบัตรของท่าน</v-card-title>
+                                <v-card-text class="black--text pt-5">
+                                    <v-form>
+                                        <b style="font-size:larger;" >Card No.</b>
+                                        <v-text-field outlined></v-text-field>
+                                        <b style="font-size:larger;">Password</b>
+                                        <v-text-field outlined></v-text-field>
+                                        <v-row>
+                                        <v-col cols=12 sm=4>
+                                        <b style="font-size:larger;">CCV/CVV</b>
+                                        <v-text-field outlined></v-text-field>
+                                        </v-col>
+                                        </v-row>
+                                    </v-form>
+                                    
                                 </v-card-text>
+                                <v-card-actions>
+                                        <v-spacer></v-spacer>
+                                        <v-btn color="black" class="font-weight-bold " large text @click="payment=false" >
+                                            ยกเลิก
+                                        </v-btn>
+                                        <v-btn color="black" class="font-weight-bold " large text >
+                                            ยืนยัน
+                                        </v-btn>
+                                </v-card-actions>
                         </v-card>
                         
                     </v-dialog>
@@ -802,37 +816,51 @@ const Subscribe={template:`<div style="background-color: #FDA50B;">
                     รวม 1,600 บาท 
                     <br/> ประหยัดได้ 1 เดือน
                     </div>
-                    <v-dialog v-model="payment" width="800" >
-                        <template v-slot:activator="{ on }">
-                            <div align="center">
-                                <v-btn
-                                  color="orange"
-                                  class="white--text"
-                                  width=250                                                      
-                                  large
-                                  v-on="on"
-                                  style="font-size: 20px;"
-                                >
-                                    เลือก
-                                </v-btn>
-                            </div>
-                        </template>
-
-                        <v-card >
-                            <v-card-text class="black--text pt-5 text-center">
-                                <span style="font-size: 24px;">โปรดเลือกช่องทางการชำระเงิน</span>
-                                <v-card-actions>
-                                        <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined >
-                                            บัตรเครดิต
+                    <v-dialog v-model="payment" width="400" >
+                            <template v-slot:activator="{ on }">
+                                <div align="center">
+                                    <v-btn
+                                      color="orange"
+                                      class="white--text"
+                                      width=250                                                      
+                                      large
+                                      v-on="on"
+                                      style="font-size: 20px;"
+                                    >
+                                        เลือก
                                         </v-btn>
-                                        <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined >
-                                            Paypal
-                                        </v-btn>
-                                </v-card-actions>
-                            </v-card-text>
-                        </v-card>
-
-                    </v-dialog>
+                                </div>
+                            </template>
+    
+                            <v-card >
+                                    <v-card-title>กรุณากรอกรายละเอียดบัตรของท่าน</v-card-title>
+                                    <v-card-text class="black--text pt-5">
+                                        <v-form>
+                                            <b style="font-size:larger;" >Card No.</b>
+                                            <v-text-field outlined></v-text-field>
+                                            <b style="font-size:larger;">Password</b>
+                                            <v-text-field outlined></v-text-field>
+                                            <v-row>
+                                            <v-col cols=12 sm=4>
+                                            <b style="font-size:larger;">CCV/CVV</b>
+                                            <v-text-field outlined></v-text-field>
+                                            </v-col>
+                                            </v-row>
+                                        </v-form>
+                                        
+                                    </v-card-text>
+                                    <v-card-actions>
+                                            <v-spacer></v-spacer>
+                                            <v-btn color="black" class="font-weight-bold " large text @click="payment=false" >
+                                                ยกเลิก
+                                            </v-btn>
+                                            <v-btn color="black" class="font-weight-bold " large text >
+                                                ยืนยัน
+                                            </v-btn>
+                                    </v-card-actions>
+                            </v-card>
+                            
+                        </v-dialog>
                    
                 </v-card-text>
                 
@@ -878,35 +906,51 @@ const Subscribe={template:`<div style="background-color: #FDA50B;">
                     รวม 2,400 บาท 
                     <br/> ประหยัดได้ 4 เดือน
                     </div>
-                    <v-dialog v-model="payment" width="800" >
-                        <template v-slot:activator="{ on }">
-                            <div align="center">
-                                <v-btn
-                                  color="orange"
-                                  class="white--text"
-                                  width=250                                                      
-                                  large
-                                  v-on="on"
-                                  style="font-size: 20px;"
-                                >
-                                    เลือก
-                                    </v-btn>
-                            </div>
-                        </template>
-                        <v-card >
-                            <v-card-text class="black--text pt-5 text-center">
-                                <span style="font-size: 24px;">โปรดเลือกช่องทางการชำระเงิน</span>
-                                <v-card-actions>
-                                        <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined >
-                                            บัตรเครดิต
+                    <v-dialog v-model="payment" width="400" >
+                            <template v-slot:activator="{ on }">
+                                <div align="center">
+                                    <v-btn
+                                      color="orange"
+                                      class="white--text"
+                                      width=250                                                      
+                                      large
+                                      v-on="on"
+                                      style="font-size: 20px;"
+                                    >
+                                        เลือก
                                         </v-btn>
-                                        <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined >
-                                            Paypal
-                                        </v-btn>
-                                </v-card-actions>
-                            </v-card-text>
-                        </v-card>
-                    </v-dialog>
+                                </div>
+                            </template>
+    
+                            <v-card >
+                                    <v-card-title>กรุณากรอกรายละเอียดบัตรของท่าน</v-card-title>
+                                    <v-card-text class="black--text pt-5">
+                                        <v-form>
+                                            <b style="font-size:larger;" >Card No.</b>
+                                            <v-text-field outlined></v-text-field>
+                                            <b style="font-size:larger;">Password</b>
+                                            <v-text-field outlined></v-text-field>
+                                            <v-row>
+                                            <v-col cols=12 sm=4>
+                                            <b style="font-size:larger;">CCV/CVV</b>
+                                            <v-text-field outlined></v-text-field>
+                                            </v-col>
+                                            </v-row>
+                                        </v-form>
+                                        
+                                    </v-card-text>
+                                    <v-card-actions>
+                                            <v-spacer></v-spacer>
+                                            <v-btn color="black" class="font-weight-bold " large text @click="payment=false" >
+                                                ยกเลิก
+                                            </v-btn>
+                                            <v-btn color="black" class="font-weight-bold " large text >
+                                                ยืนยัน
+                                            </v-btn>
+                                    </v-card-actions>
+                            </v-card>
+                            
+                        </v-dialog>
                    
                 </v-card-text>
                 
@@ -970,6 +1014,7 @@ new Vue({
             trainerinfo:false, //ส่วนที่เพิ่มมา
             cancel:false,
             payment:false,
+            cvv:false,
             items: [
               {
                 src: '/pic/slider-1.png',
