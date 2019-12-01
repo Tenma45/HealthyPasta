@@ -36,7 +36,10 @@ app.use(session({
 
 const fdatabase = firebase.database();
 const memberref = fdatabase.ref('member')
-
+const schedule = fdatabase.ref('schedule')
+const orderTrainer = fdatabase.ref('orderTrainer')
+const orderFDM = fdatabase.ref('orderFDM')
+ 
 app.get('/',(req,res)=>{
     if(req.session.username){
         if(req.session.role=="client"){
@@ -113,6 +116,79 @@ app.get('/error',(req,res)=>{
     
     res.sendFile(path.join(__dirname,'/public/404.html'));
 })
+//HERE
+app.post('/fetchprofile',(req,res)=>{
+    memberref.once("value", function(snapshot) {
+    let doc = snapshot.child(req.session.username).val();
+    res.json(doc)
+    })
+ })
+
+app.post('/updateprofile',(req,res)=>{
+    req.body.username=req.session.username
+    memberref.once("value", function(snapshot) {
+        let doc = snapshot.child(req.session.username).val();
+        req.body.password=doc.password
+        req.body.role=doc.role
+        memberref.child("/"+req.session.username).set(req.body)
+        //memberref.child("/"+req.session.username).update({firstname:req.body.firstname})    
+        res.redirect('/#/home')
+        })
+ })
+ 
+ app.post('/addrequest',(req,res)=>{
+    memberref.child("/"+req.body.username).set(req.body)
+    res.redirect('/')
+ })
+
+ app.post('/fetchstate',(req,res)=>{
+    res.redirect('/')
+ })
+
+ app.post('/fetchrequest1',(req,res)=>{
+    res.redirect('/')
+ })
+
+ app.post('/fetchrequest2',(req,res)=>{
+    res.redirect('/')
+ })
+
+ app.post('/addclient1',(req,res)=>{
+    res.redirect('/')
+ })
+
+ app.post('/addclient2',(req,res)=>{
+    res.redirect('/')
+ })
+
+ app.post('/fetchclient1',(req,res)=>{
+    res.redirect('/')
+ })
+
+ app.post('/fetchclient2',(req,res)=>{
+    res.redirect('/')
+ })
+
+ app.post('/fetchschedule',(req,res)=>{
+    res.redirect('/')
+ })
+
+ app.post('/addschedule',(req,res)=>{
+    res.redirect('/')
+ })
+
+ app.post('/removeprogram',(req,res)=>{
+    res.redirect('/')
+ })
+
+ app.post('/removerequest',(req,res)=>{
+    res.redirect('/')
+ })
+
+ app.post('/doneclient',(req,res)=>{
+    res.redirect('/')
+ })
+
 
 app.listen(process.env.port||6000,()=>{
     console.log("Server is on");

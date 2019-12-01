@@ -1,4 +1,4 @@
-const Home={template:`
+var Home={template:`
 <v-container> 
 <template>
   <v-carousel>
@@ -8,24 +8,10 @@ const Home={template:`
   </v-carousel>
 </template>
 </v-container>`,
-data: () => ({
-  items: [
-    {
-      src: '/pic/slider-1.png',
-    },
-    {
-      src: '/pic/slider-2.png',
-    },
-    {
-      src: '/pic/slider-3.png',
-    },
-    {
-      src: '/pic/slider-4.png',
-    },
-  ]
-})}
+props: ['items']
+}
 
-const EditProfile={template:'<div style="background-color: #FDA50B;">\
+var EditProfile={template:'<div style="background-color: #FDA50B;">\
 <v-container>\
     <div style="font-size: 28px;">\
         <v-icon large color="black">edit</v-icon>&nbsp;\
@@ -38,66 +24,73 @@ const EditProfile={template:'<div style="background-color: #FDA50B;">\
                     <v-file-input\
                     accept="image/png, image/jpeg, image/bmp"\
                     prepend-icon="mdi-camera"\
-                    placeholder="Upload Your Picture"></v-file-input>\
+                    placeholder="Upload Your Picture" @click.prevent="not=true"></v-file-input>\
                 </div>\
             </div>\
-            <v-form class="black--text">\
-            <b style="font-size:larger;">Username</b>\
-                    <v-text-field outlined></v-text-field>\
-                    <b style="font-size:larger;">Password</b>\
-                    <v-text-field outlined></v-text-field>\
+            <v-form action="/updateprofile" method="post" class="black--text" >\
+            <b style="font-size:larger;" >Username</b>\
+            <v-text-field outlined name="username" :disabled="true" v-model="info.username"></v-text-field>\
                 <v-divider></v-divider>\
                 <v-row>\
                     <v-col cols="12" sm="6">\
-                        <b style="font-size:larger;">Name</b>\
-                        <v-text-field outlined></v-text-field>\
+                        <b style="font-size:larger;" >Name</b>\
+                        <v-text-field outlined name="firstname" v-model="info.firstname"></v-text-field>\
                     </v-col>\
                     <v-col cols="12" sm="6">\
                         <b style="font-size:larger;">Surename</b>\
-                        <v-text-field outlined></v-text-field>\
+                        <v-text-field outlined name="lastname" v-model="info.lastname"></v-text-field>\
                     </v-col>\
                 </v-row>\
                     <b style="font-size:larger;">Email</b>\
-                    <v-text-field outlined></v-text-field>\
+                    <v-text-field outlined name="email" v-model="info.email"></v-text-field>\
                 <v-row>\
                     <v-col cols="12" sm="6">\
                         <b style="font-size:larger;">Bithday</b>\
-                        <v-text-field outlined></v-text-field>\
+                        <v-text-field outlined name="bod" v-model="info.bod"></v-text-field>\
                     </v-col>\
                     <v-col cols="12" sm="6">\
                         <b style="font-size:larger;">Phone No.</b>\
-                        <v-text-field outlined></v-text-field>\
+                        <v-text-field outlined name="tel" v-model="info.tel"></v-text-field>\
                     </v-col>\
                 </v-row>\
                     <b style="font-size:larger;">Adress</b>\
-                    <v-text-field outlined></v-text-field>\
+                    <v-text-field outlined name="address" v-model="info.address"></v-text-field>\
                 <v-row>\
                     <v-col cols="12" sm="4">\
                         <b style="font-size:larger;">Blood Type</b>\
-                        <v-text-field outlined></v-text-field>\
+                        <v-text-field outlined name="blood" v-model="info.blood"></v-text-field>\
                     </v-col>\
                     <v-col cols="12" sm="4">\
                         <b style="font-size:larger;">Weight</b>\
-                        <v-text-field outlined></v-text-field>\
+                        <v-text-field outlined name="weight" v-model="info.weight"></v-text-field>\
                     </v-col>\
                     <v-col cols="12" sm="4">\
                         <b style="font-size:larger;">Height</b>\
-                        <v-text-field outlined></v-text-field>\
+                        <v-text-field outlined name="height" v-model="info.height"></v-text-field>\
                     </v-col>\
                 </v-row>\
-                <b style="font-size:larger;">Personality</b>\
-                <v-text-field outlined></v-text-field>\
-            </v-form>\
             <v-divider></v-divider>\
-        </v-card-text>\
         <v-card-actions>\
-                <v-btn color="#FDA50B" class="mx-auto" large >\
-                    Save\
-                </v-btn>\
-            </v-card-actions>\
+          <v-btn type="submit" color="#FDA50B" class="mx-auto" large >\
+            Save\
+            </v-btn>\
+        </v-card-actions>\
+        </v-form>\
+        </v-card-text>\
     </v-card>\
+    <v-dialog v-model="not" width="300" >\
+                <v-card>\
+                    <v-card-text class="black--text pt-5 text-center">\
+                        <span style="font-size: 24px;">ระบบยังไม่เปิดใช้งาน</span>\
+                        <div><v-icon size=120 color="#FDA50B">warning</v-icon></div>\
+                    </v-card-text>\
+                </v-card>\
+            </v-dialog>\
 </v-container>\
-</div> '}
+</div> ',
+props:['info','not'],
+}
+    
 
 //before choose
 const Course={template:`<v-container>
@@ -184,29 +177,27 @@ const Course2={template:`<v-container>
                                     <v-row>
                                         <v-col cols="12" sm="6">
                                             <b style="font-size:larger;">Name</b>
-                                            <v-text-field disabled outlined></v-text-field>
+                                            <v-text-field outlined></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6">
                                             <b style="font-size:larger;">Surename</b>
-                                            <v-text-field disabled outlined></v-text-field>
+                                            <v-text-field outlined></v-text-field>
                                         </v-col>
                                     </v-row>
                                         <b style="font-size:larger;">Email</b>
-                                        <v-text-field disabled outlined></v-text-field>
+                                        <v-text-field outlined></v-text-field>
                                     <v-row>
                                         <v-col cols="12" sm="6">
                                             <b style="font-size:larger;">Bithday</b>
-                                            <v-text-field disabled outlined></v-text-field>
+                                            <v-text-field outlined></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6">
                                             <b style="font-size:larger;">Phone No.</b>
-                                            <v-text-field disabled outlined></v-text-field>
+                                            <v-text-field outlined></v-text-field>
                                         </v-col>
                                     </v-row>
                                         <b style="font-size:larger;">Adress</b>
-                                        <v-text-field disabled outlined></v-text-field>
-                                    <b style="font-size:larger;">Personality</b>
-                                    <v-text-field disabled outlined></v-text-field>
+                                        <v-text-field outlined></v-text-field>
                                 </v-form>
                         </v-card-text>
                     </v-card>
@@ -587,8 +578,8 @@ data (){
                   
               ],
       
-  }
-}, //ปิดของ data
+  }//ปิดของ data
+},
 computed: {
   title() {
     
@@ -957,7 +948,20 @@ new Vue({
     router,
     vuetify: new Vuetify(),
     data (){
-        return {
+        return {  
+            info:{
+              username: '',
+              firstname:'',
+              lastname: '',
+              bod: '',
+              email: '',
+              address: '',
+              tel: '',
+              blood: '',
+              weight: '',
+              height: '',
+            },
+            NotAvaliable:false,
             user:false,
             offset:true,
             closeOnContentClick:false,
@@ -966,7 +970,20 @@ new Vue({
             trainerinfo:false, //ส่วนที่เพิ่มมา
             cancel:false,
             payment:false,
-            
+            items: [
+              {
+                src: '/pic/slider-1.png',
+              },
+              {
+                src: '/pic/slider-2.png',
+              },
+              {
+                src: '/pic/slider-3.png',
+              },
+              {
+                src: '/pic/slider-4.png',
+              },
+            ],
             today: "today",
             focus: "today",
             type: 'month',
@@ -1004,6 +1021,9 @@ new Vue({
             
         }
     }, //ปิดของ data
+    created: function(){
+      this.fetchInfo()
+    },
     computed: {
         title() {
           
@@ -1040,8 +1060,33 @@ new Vue({
 
       },//ปิดของ computed
 
+      components: {
+        'my-component':Home 
+      },
 
     methods: {
+      alerttest() {
+        alert("TEST")
+      },
+      async fetchprofile(){
+        try{
+          const res = await axios.post('/fetchprofile',{
+          })
+           this.info=res.data
+           router.push("/editprofile")
+        }catch (err){
+            console.log(err)
+        }
+      },
+      async fetchInfo(){
+        try{
+          const res = await axios.post('/fetchprofile',{
+          })
+           this.info=res.data
+        }catch (err){
+            console.log(err)
+        }
+      },
         pushtest(e){
                 
             rand=Math.floor(Math.random() * 1000);
