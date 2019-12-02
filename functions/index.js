@@ -184,7 +184,7 @@ app.post('/updateprofile',(req,res)=>{
     ordertrainer.once("value", function(snapshot) {
         let id = snapshot.child(req.session.username).val().courseid;
         course.once("value", function(snapshot2) {
-            let temp = '"'+id+'"'
+            let temp = id
             let doc = snapshot2.child(temp).val()
         res.json(doc)
      })

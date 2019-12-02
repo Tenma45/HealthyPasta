@@ -17,8 +17,8 @@
             <v-app-bar app color="black" height=150>
                 <img src="./pic/LogoHP-Dark.png" height="175">
                 <v-btn color="white" depressed x-large>Home</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่ม home-->
-                <v-btn color="white" depressed text x-large :to="{path:'/request'}">Reqeust</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่มคำขอ-->
-                <v-btn color="white" depressed text x-large :to="{path:'/cmanage'}">Course Management</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่มจัดการคอร์ส-->
+                <v-btn color="white" depressed text x-large @click="fetchrequest">Reqeust</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่มคำขอ-->
+                <v-btn color="white" depressed text x-large @click="fetchclient">Course Management</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่มจัดการคอร์ส-->
                 <v-spacer></v-spacer>
   
                 <div style="width: 200px; height: 55px; background-color: #FDA50B;"> <!--ส่วนของกล่องชื่อผู้ใช้-->
@@ -60,7 +60,7 @@
             </v-app-bar>
 
             <v-content> 
-                    <router-view></router-view>
+                    <router-view :info="userinfo"></router-view>
                     
                     
             </v-content>
@@ -72,6 +72,6 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-router@3.1.3/dist/vue-router.min.js"></script>
-    <script src="./static/TrainerIndex.js" charset="UTF-8"></script>
+    <script src="./static/TrainerIndex2.js" charset="UTF-8"></script>
 </body>
 </html>

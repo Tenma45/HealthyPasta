@@ -755,8 +755,8 @@ data (){
 
 const router=new VueRouter ({
   routes : [
-      {path:'/request', component:request},
-      {path:'/cmanage', component:cmanage},
+      {path:'/course-request', component:request},
+      {path:'/course-manage', component:cmanage},
       {path:'/editprofile', component:EditProfile},
       {path:'/message', component:{template:'<div align="center" class="white--text " style="font-size: 50px; margin-top: 150px;"><v-icon color="white" size="100">error</v-icon>&nbsp;Sorry! This page not available.</div>'}},
       {path:'/setting', component:{template:'<div align="center" class="white--text " style="font-size: 50px; margin-top: 150px;"><v-icon color="white" size="100">error</v-icon>&nbsp;Sorry! This page not available.</div>'}},
@@ -775,6 +775,8 @@ new Vue({
     return {
 
         user:false,
+        requesttrainer:[],
+        clienttrainer:[],
             offset:true,
             closeOnContentClick:false,
             calendar:false,
@@ -903,7 +905,44 @@ new Vue({
                     console.log(err)
                 }
               },
-              
+              async fetchInfo(){
+                try{
+                  const res = await axios.post('/fetchprofile',{
+                  })
+                   this.userinfo=res.data
+                }catch (err){
+                    console.log(err)
+                }
+              },
+              async fetchrequest(){
+                try{
+                  const res = await axios.post('/fetchrequest1',{
+                  })
+                   this.requesttrainer=res.data
+                   router.push('/course-request')
+                }catch (err){
+                    console.log(err)
+                }
+              },
+              async fetchclient(){
+                try{
+                  const res = await axios.post('/fetchclient1',{
+                  })
+                   this.clienttrainer=res.data
+                   router.push('/course-manage')
+                }catch (err){
+                    console.log(err)
+                }
+              },
+              async updateschedule(){
+                try{
+                  const res = await axios.post('/addschedule',{
+                  })
+                   this.userinfo=res.data
+                }catch (err){
+                    console.log(err)
+                }
+              },
               pushtest(e){
                 
                 rand=Math.floor(Math.random() * 1000);

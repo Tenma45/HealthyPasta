@@ -519,12 +519,13 @@ const CourseWait={template:`<v-container>
                 
             <div align="center"><b style="font-size: 20px; color:#FDA50B;">กำลังดำเนินการ</b></div>
           <v-card-actions>
-            <v-dialog v-model="cancel" width="500" >
-                <template v-slot:activator="{ on }">
-                    <v-btn color="white" rounded  class="mx-auto" outlined depressed  width=100 >
+                <template>
+                    <v-btn color="white" rounded @click="cancel=true" class="mx-auto" outlined depressed  width=100 >
                         <span class="subtitle-1 font-weight-bold">ยกเลิก</span>
                     </v-btn>
                 </template>
+                
+            <v-dialog v-model="cancel" width="500" >
                 <v-card >
                     <v-card-text class="black--text pt-5 text-center">
                         <span style="font-size: 24px;">คุณยืนยันที่จะยกเลิก Course นี้ ใช่หรือไม่?</span>
@@ -1207,6 +1208,7 @@ new Vue({
         }
       },
       async removerequest(){
+        alert("DO")
         try{
             const res = await axios.post('/removerequest',{
           })
