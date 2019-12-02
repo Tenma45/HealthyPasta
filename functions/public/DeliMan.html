@@ -17,17 +17,18 @@
             <v-app-bar app color="black" height=150>
                 <img src="./pic/LogoHP-Dark.png" height="175">
                 <v-btn color="white" depressed x-large>Home</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่ม home-->
-                <v-btn color="white" depressed text x-large :to="{path:'/request'}">Request</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่มคำขอ-->
-                <v-btn color="white" depressed text x-large :to="{path:'/reqmanage'}">Request Management</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่มจัดการคอร์ส-->
+                <v-btn color="white" depressed text x-large @click="fetchrequest" >Request</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่มคำขอ-->
+                <v-btn color="white" depressed text x-large @click="fetchclient" >Request Management</v-btn>&nbsp;&nbsp;&nbsp; <!--ปุ่มจัดการคอร์ส-->
                 <v-spacer></v-spacer>
               
                 <div style="width: 200px; height: 55px; background-color: #FDA50B;"><!--ส่วนของกล่องชื่อผู้ใช้-->
-                    
-                            <div style="font-size: 22px; 
+                    <div style="font-size: 22px; 
                             max-width: 150px; 
-                            margin-left:20px; 
-                            margin-top: 10px;" 
-                            class="d-inline-block text-truncate"><b>Delivery0000000000000</b></div><!--ชื่อผู้ใช้-->
+                            margin-left:10px; 
+                            margin-top: 7px;" 
+                            class="d-inline-block text-truncate">
+                            <v-avatar size="40" ><img src="./pic/user.png"></v-icon></v-avatar> <!--avatar สามารถใส่ pic ได้-->
+                            <b>{{userinfo.firstname}}</b></div> <!--ชื่อผู้ใช้-->
                 </div>
                 <v-menu bottom :offset-y="offset" 
                 :close-on-content-click="closeOnContentClick"> <!--ส่วนของกล่องเมนู-->
@@ -47,7 +48,7 @@
                                         <v-list-item-title>Manage Account</v-list-item-title>
                                     </v-list-item-content>
                                 </template>
-                            <v-list-item @click=''>Edit Profile</v-list-item> <!-- เมนู Edit profile กับ Subscribe อยู่ใต้ Manage-->
+                            <v-list-item @click="fetchprofile">Edit Profile</v-list-item> <!-- เมนู Edit profile กับ Subscribe อยู่ใต้ Manage-->
                             </v-list-group> <!--group เมนู manage account-->
                             <v-list-item :to="{path:'/message'}">Message</v-list-item> <!--เมนู ข้อความ -->
                             <v-list-item :to="{path:'/setting'}">Setting</v-list-item> <!--เมนู ตั้งค่า -->
@@ -57,7 +58,9 @@
             </v-app-bar>
 
             <v-content> 
-                    <router-view></router-view>
+                    <router-view :userinfo="userinfo" :addclient='addclient' 
+                    :clientinfo='clientinfo' :orderfdm="orderfdm"
+                    :clientfdm="clientfdm" :removeclient='removeclient'></router-view>
 
                           
                     

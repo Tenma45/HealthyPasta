@@ -19,7 +19,7 @@ var EditProfile={template:'<div style="background-color: #FDA50B;">\
     </div>\
     <v-card width=500 class="mx-auto" color="white" outlined>\
             <v-card-text>\
-            <div align="center" full-width><v-avatar size="200" color="black" ></v-avatar>\
+            <div align="center" full-width> <v-avatar size="200" ><img src="./pic/user.png"></v-icon></v-avatar>\
                 <div style="width: 250px;">\
                     <v-file-input\
                     accept="image/png, image/jpeg, image/bmp"\
@@ -100,6 +100,7 @@ const Course={template:`<v-container>
 <v-card-text class="white--text subtitle-1">
     <v-row  v-for="(course,i) in courseinfo" :key="i">
     
+
         <v-col col="12" sm="3">
             <div class="text-center"><img :src="course.pic" height="150"></div>
         </v-col>
@@ -109,8 +110,8 @@ const Course={template:`<v-container>
         </v-col>
         <v-col col="12" sm="2">
         <v-card-actions>
-        <v-btn @click="choose=true;" color="#FDA50B" rounded  x-large class="mx-auto" outlined depressed v-on="on" >
-             <span class="title font-weight-bold" >เลือก</span>
+        <v-btn @click="choose=true;" color="#FDA50B" rounded  x-large class="mx-auto" outlined depressed   >
+             <span class="title font-weight-bold" @click="id=course.id">เลือก</span>
         </v-btn>
             <v-dialog v-model="choose" width="500" >
                 <v-card >
@@ -121,7 +122,7 @@ const Course={template:`<v-container>
                                 <v-btn color="black" class="font-weight-bold mx-auto" x-large outlined @click="choose=false">
                                     ยกเลิก
                                 </v-btn>
-                                <v-btn @click="addrequest($event, course.id)" color="black" class="font-weight-bold mx-auto" x-large outlined >
+                                <v-btn @click="addrequest($event,id)" color="black" class="font-weight-bold mx-auto" x-large outlined >
                                     ยืนยัน
                                 </v-btn>
                         </v-card-actions>
@@ -150,6 +151,7 @@ methods: {
 },*/
 data (){
   return {
+      id:'',
       user:false,
       offset:true,
       closeOnContentClick:false,
@@ -177,13 +179,13 @@ const Course2={template:`<v-container>
           
                 <v-dialog v-model="trainerinfo" width="500" >
                     <template v-slot:activator="{ on }">
-                        <v-btn color="#FDA50B"  x-large class="mx-auto" depressed text v-on="on" >
+                        <v-btn color="#FDA50B"  x-large class="mx-auto" depressed text >
                             <span class="subtitle-1 font-weight-bold" >ดูรายละเอียด</span>
                         </v-btn>
                     </template>
                     <v-card >
                         <v-card-text class="black--text pt-5">
-                                <div align="center" full-width><v-avatar size="200" color="black" ></v-avatar>
+                                <div align="center" full-width> <v-avatar size="200" ><img src="./pic/user.png"></v-icon></v-avatar>
                                 </div>
                                 <v-form class="black--text">
                                     <v-row>
@@ -222,7 +224,7 @@ const Course2={template:`<v-container>
                 
               <v-dialog v-model="sche" width="800" >
                   <template v-slot:activator="{ on }">
-                      <v-btn color="#FDA50B"  x-large class="mx-auto" depressed v-on="on" >
+                      <v-btn color="#FDA50B"  x-large class="mx-auto" depressed  >
                           <span class="subtitle-1 font-weight-bold" >กำหนดการ</span>
                       </v-btn>
                   </template>
@@ -243,7 +245,7 @@ const Course2={template:`<v-container>
                                         <template v-slot:activator="{ on }">
                                             <v-btn
                                             outlined
-                                            v-on="on"
+                                            
                                             >
                                             <span>{{ typeToLabel[type] }}</span>
                                             <v-icon right>mdi-menu-down</v-icon>
@@ -328,7 +330,7 @@ const Course2={template:`<v-container>
             <br/>
               <v-dialog v-model="cancel" width="500" >
                 <template v-slot:activator="{ on }">
-                    <v-btn color="white" rounded  class="mx-auto" outlined depressed v-on="on" width=100 >
+                    <v-btn color="white" rounded  class="mx-auto" outlined depressed  width=100 >
                         <span class="subtitle-1 font-weight-bold" >ยกเลิก</span>
                     </v-btn>
                 </template>
@@ -519,7 +521,7 @@ const CourseWait={template:`<v-container>
           <v-card-actions>
             <v-dialog v-model="cancel" width="500" >
                 <template v-slot:activator="{ on }">
-                    <v-btn color="white" rounded  class="mx-auto" outlined depressed v-on="on" width=100 >
+                    <v-btn color="white" rounded  class="mx-auto" outlined depressed  width=100 >
                         <span class="subtitle-1 font-weight-bold">ยกเลิก</span>
                     </v-btn>
                 </template>
@@ -694,7 +696,7 @@ const Subscribe={template:`<div style="background-color: #FDA50B;">
 <v-container>
 <div class="black--text" style="text-decoration: underline; font-size: 35px;" > ต่ออายุสมาชิก</div>
 <br/>
-<div class="black--text" style="font-size: 20px;" > วันหมดอายุ : 14/06/2020</div>
+<div class="black--text" style="font-size: 20px;" > วันหมดอายุ : {{expiredate}}</div>
 <br/>
 <br/>
 <v-card color="#FDA50B" outlined  max-width="1200">
@@ -739,34 +741,38 @@ const Subscribe={template:`<div style="background-color: #FDA50B;">
                     <br/>
                     <br/>
                     </div>
-                    <v-dialog v-model="payment" width="400" >
-                        <template v-slot:activator="{ on }">
+                    
+                        <template >
                             <div align="center">
-                                <v-btn
+                                <v-btn @click="payment=true; month=1;"
                                   color="orange"
                                   class="white--text"
                                   width=250                                                      
                                   large
-                                  v-on="on"
+                                   
                                   style="font-size: 20px;"
                                 >
                                     เลือก
                                     </v-btn>
                             </div>
                         </template>
-
+                        <v-dialog v-model="payment" width="400" >
                         <v-card >
                                 <v-card-title>กรุณากรอกรายละเอียดบัตรของท่าน</v-card-title>
                                 <v-card-text class="black--text pt-5">
                                     <v-form>
                                         <b style="font-size:larger;" >Card No.</b>
-                                        <v-text-field outlined></v-text-field>
-                                        <b style="font-size:larger;">Password</b>
+                                        <v-text-field outlined maxlength="16"></v-text-field>
+                                        <b style="font-size:larger;">Name on card</b>
                                         <v-text-field outlined></v-text-field>
                                         <v-row>
+                                        <v-col cols=12 sm=6>
+                                        <b style="font-size:larger;">Expire date</b>
+                                        <v-text-field outlined ></v-text-field>
+                                        </v-col>
                                         <v-col cols=12 sm=4>
-                                        <b style="font-size:larger;">CCV/CVV</b>
-                                        <v-text-field outlined></v-text-field>
+                                        <b style="font-size:larger;">CVV</b>
+                                        <v-text-field outlined maxlength="3"></v-text-field>
                                         </v-col>
                                         </v-row>
                                     </v-form>
@@ -777,7 +783,7 @@ const Subscribe={template:`<div style="background-color: #FDA50B;">
                                         <v-btn color="black" class="font-weight-bold " large text @click="payment=false" >
                                             ยกเลิก
                                         </v-btn>
-                                        <v-btn color="black" class="font-weight-bold " large text >
+                                        <v-btn @click="updateexpire(month,expiredate)" color="black" class="font-weight-bold " large text >
                                             ยืนยัน
                                         </v-btn>
                                 </v-card-actions>
@@ -830,15 +836,14 @@ const Subscribe={template:`<div style="background-color: #FDA50B;">
                     รวม 1,600 บาท 
                     <br/> ประหยัดได้ 1 เดือน
                     </div>
-                    <v-dialog v-model="payment" width="400" >
-                            <template v-slot:activator="{ on }">
+                            <template @click="payment=true; month=6;">
                                 <div align="center">
                                     <v-btn
                                       color="orange"
                                       class="white--text"
                                       width=250                                                      
                                       large
-                                      v-on="on"
+                                       
                                       style="font-size: 20px;"
                                     >
                                         เลือก
@@ -846,6 +851,7 @@ const Subscribe={template:`<div style="background-color: #FDA50B;">
                                 </div>
                             </template>
     
+                    <v-dialog v-model="payment2" width="400" >
                             <v-card >
                                     <v-card-title>กรุณากรอกรายละเอียดบัตรของท่าน</v-card-title>
                                     <v-card-text class="black--text pt-5">
@@ -920,22 +926,22 @@ const Subscribe={template:`<div style="background-color: #FDA50B;">
                     รวม 2,400 บาท 
                     <br/> ประหยัดได้ 4 เดือน
                     </div>
-                    <v-dialog v-model="payment" width="400" >
-                            <template v-slot:activator="{ on }">
+                    
+                            <template @click="payment=true; month=12;">
                                 <div align="center">
                                     <v-btn
                                       color="orange"
                                       class="white--text"
                                       width=250                                                      
                                       large
-                                      v-on="on"
+                                       
                                       style="font-size: 20px;"
                                     >
                                         เลือก
                                         </v-btn>
                                 </div>
                             </template>
-    
+    <v-dialog v-model="payment3" width="400" >
                             <v-card >
                                     <v-card-title>กรุณากรอกรายละเอียดบัตรของท่าน</v-card-title>
                                     <v-card-text class="black--text pt-5">
@@ -951,7 +957,7 @@ const Subscribe={template:`<div style="background-color: #FDA50B;">
                                             </v-col>
                                             </v-row>
                                         </v-form>
-                                        
+
                                     </v-card-text>
                                     <v-card-actions>
                                             <v-spacer></v-spacer>
@@ -978,8 +984,12 @@ const Subscribe={template:`<div style="background-color: #FDA50B;">
   
 </v-container>
 </div>`,
+props:['expiredate','updateexpire'],
 data : ()=>({
-  payment:false
+  payment:false,
+  payment2:false,
+  payment3:false,
+  month:0,
 })
 }
 
@@ -1021,6 +1031,7 @@ new Vue({
             },
             courseinfo:[],
             wait:[],
+            expiredate:'',
             NotAvaliable:false,
             user:false,
             offset:true,
@@ -1029,7 +1040,6 @@ new Vue({
             sche:false, //ส่วนที่เพิ่มมา
             trainerinfo:false, //ส่วนที่เพิ่มมา
             cancel:false,
-            payment:false,
             cvv:false,
             items: [
               {
@@ -1201,6 +1211,27 @@ new Vue({
             const res = await axios.post('/removerequest',{
           })
            this.fetchstatus()
+        }catch (err){
+            console.log(err)
+        }
+      },
+      async fetchexpire(){
+        try{
+            const res = await axios.post('/fetchexpire',{
+          })
+           this.expiredate = res.data
+           router.push('/subscribe')
+        }catch (err){
+            console.log(err)
+        }
+      },
+      async updateexpire(month,current){
+        try{
+            const res = await axios.post('/updateexpire',{
+              month:month,
+              current:current
+          })
+           router.push('/#/home')
         }catch (err){
             console.log(err)
         }

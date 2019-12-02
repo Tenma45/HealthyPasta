@@ -40,7 +40,9 @@ const course = fdatabase.ref('course')
 const clientstatus = fdatabase.ref('clientstatus')
 const schedule = fdatabase.ref('schedule')
 const ordertrainer = fdatabase.ref('ordertrainer')
-const orderFDM = fdatabase.ref('orderFDM')
+const orderfdm = fdatabase.ref('orderfdm')
+const clientfdm = fdatabase.ref('clientfdm')
+const clienttrainer = fdatabase.ref('clienttrainer')
  
 app.get('/',(req,res)=>{
     if(req.session.username){
@@ -62,6 +64,10 @@ app.get('/',(req,res)=>{
 app.post('/register',(req,res)=>{
     req.body.role="client"
     memberref.child("/"+req.body.username).set(req.body)
+    let date = new Date()
+    let expiredate = new Date(date.setMonth(date.getMonth()+1))
+    let doc = expiredate.getFullYear().toString(10)+"-"+(expiredate.getMonth()+1).toString(10)+"-"+expiredate.getDate().toString(10)
+    clientstatus.child("/"+req.body.username).set({username:req.body.username,expiredate:doc,coursestatus:1})
     req.session.username=req.body.username
     req.session.role=req.body.role
     res.redirect('/')
@@ -144,6 +150,21 @@ app.post('/updateprofile',(req,res)=>{
     res.json("")
  })
 
+ app.post('/fetchexpire',(req,res)=>{
+     clientstatus.once("value", function(snapshot) {
+        let doc = snapshot.child(req.session.username).val().expiredate;
+        res.json(doc)
+     })
+ })
+ 
+ app.post('/updateexpire',(req,res)=>{
+    let date = new Date(req.body.current)
+    let newexpiredate = new Date(date.setMonth(date.getMonth()+req.body.month))
+    let doc = newexpiredate.getFullYear().toString(10)+"-"+(newexpiredate.getMonth()+1).toString(10)+"-"+newexpiredate.getDate().toString(10)
+     clientstatus.child("/"+req.session.username).update({expiredate:doc})
+     res.json("")
+})
+
  app.post('/fetchstatus',(req,res)=>{
     clientstatus.once("value", function(snapshot) {
         let doc = snapshot.child(req.session.username).val();
@@ -154,6 +175,7 @@ app.post('/updateprofile',(req,res)=>{
  app.post('/fetchcourse',(req,res)=>{
     course.once("value", function(snapshot) {
         let doc = snapshot.val();
+        console.log(doc)
         res.json(doc)
      })
  })
@@ -174,7 +196,10 @@ app.post('/updateprofile',(req,res)=>{
  })
 
  app.post('/fetchrequest2',(req,res)=>{
-    res.redirect('/')
+    orderfdm.once("value", function(snapshot) {
+        let doc = snapshot.val();
+        res.json(doc)
+     })
  })
 
  app.post('/addclient1',(req,res)=>{
@@ -182,7 +207,12 @@ app.post('/updateprofile',(req,res)=>{
  })
 
  app.post('/addclient2',(req,res)=>{
-    res.redirect('/')
+    orderfdm.once("value", function(snapshot) {
+        let doc = snapshot.child(req.body.username).val();
+        clientfdm.child("/"+req.body.username).set(doc)
+        orderfdm.child("/"+req.body.username).remove()
+        res.json("")
+        })
  })
 
  app.post('/fetchclient1',(req,res)=>{
@@ -190,7 +220,10 @@ app.post('/updateprofile',(req,res)=>{
  })
 
  app.post('/fetchclient2',(req,res)=>{
-    res.redirect('/')
+    clientfdm.once("value", function(snapshot) {
+        let doc = snapshot.val();
+        res.json(doc)
+     })
  })
 
  app.post('/fetchschedule',(req,res)=>{
@@ -212,7 +245,8 @@ app.post('/updateprofile',(req,res)=>{
 })
 
  app.post('/doneclient',(req,res)=>{
-    res.redirect('/')
+    clientfdm.child("/"+req.body.username).remove()
+    res.json("")
  })
 
 

@@ -6,7 +6,7 @@ const EditProfile={template:'<div style="background-color: #FDA50B;">\
     </div>\
     <v-card width=500 class="mx-auto" color="white" outlined>\
             <v-card-text>\
-            <div align="center" full-width><v-avatar size="200" color="black" ></v-avatar>\
+            <div align="center" full-width><v-avatar size="200" ><img src="./pic/user.png"></v-icon></v-avatar>\
                 <div style="width: 250px;">\
                     <v-file-input\
                     accept="image/png, image/jpeg, image/bmp"\
@@ -79,7 +79,7 @@ const request={template:`<v-container>
                             <v-card-text class="white--text subtitle-1">
                                 <v-row>
                                     <v-col col="8" sm="2">
-                                        <div class="text-center"> <v-avatar size = 100><img src="./pic/u1.jpg" height="150"></v-avatar></div>
+                                        <div class="text-center"> <v-avatar size = 100><img src="./pic/user.png" height="150"></v-avatar></div>
                                     </v-col>
         
                                     <v-col col="8" sm="3">
@@ -243,7 +243,6 @@ data (){
 
 
           methods: {
-            
             pushtest(e){
               
               rand=Math.floor(Math.random() * 1000);
@@ -321,7 +320,7 @@ const cmanage={template:`<v-container>
                             <v-card-text class="white--text subtitle-1">
                                 <v-row>
                                     <v-col col="8" sm="2">
-                                        <div class="text-center"> <v-avatar size = 100><img src="./pic/u1.jpg" height="150"></v-avatar></div>
+                                        <div class="text-center"> <v-avatar size = 100><img src="./pic/user.png" height="150"></v-avatar></div>
                                     </v-col>
         
                                     <v-col col="8" sm="3">
@@ -497,8 +496,6 @@ const cmanage={template:`<v-container>
                                                   @change="updateRange"
 
                                                 ></v-calendar>
-
-                                                <v-btn @click="pushtest()">TEST PUSH</v-btn>
                                                 
                                                 <v-menu
                                                     v-model="selectedOpen"
@@ -779,7 +776,7 @@ new Vue({
             dialog: false,
 
       
-
+      userinfo:[],
       today: "today",
       focus: "today",
       type: 'month',
@@ -891,6 +888,15 @@ new Vue({
 
 
             methods: {
+              async fetchInfo(){
+                try{
+                  const res = await axios.post('/fetchprofile',{
+                  })
+                   this.userinfo=res.data
+                }catch (err){
+                    console.log(err)
+                }
+              },
               
               pushtest(e){
                 
@@ -960,7 +966,9 @@ new Vue({
 
                 
             },
-
+            created(){
+              this.fetchInfo()
+            }
             
             
         

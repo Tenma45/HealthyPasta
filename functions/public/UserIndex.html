@@ -29,7 +29,7 @@
                             margin-left:10px; 
                             margin-top: 7px;" 
                             class="d-inline-block text-truncate">
-                            <v-avatar size="40" color="black white--text"></v-icon></v-avatar> <!--avatar สามารถใส่ pic ได้-->
+                            <v-avatar size="40" ><img src="./pic/user.png"></v-icon></v-avatar> <!--avatar สามารถใส่ pic ได้-->
                             <b>{{info.firstname}}</b></div> <!--ชื่อผู้ใช้-->
                 </div>
 
@@ -52,7 +52,7 @@
                                     </v-list-item-content>
                                 </template>
                             <v-list-item @click="fetchprofile" >Edit Profile</v-list-item> <!-- เมนู Edit profile กับ Subscribe อยู่ใต้ Manage-->
-                            <v-list-item :to="{path:'/subscribe'}">Subscribe</v-list-item>
+                            <v-list-item @click="fetchexpire">Subscribe</v-list-item>
                             </v-list-group> <!--group เมนู manage account-->
                             <v-list-item :to="{path:'/message'}" >Message</v-list-item> <!--เมนู ข้อความ -->
                             <v-list-item :to="{path:'/setting'}">Setting</v-list-item><!--เมนู ตั้งค่า -->
@@ -63,8 +63,10 @@
 
             <v-content> 
                 <!--<my-component>{{testing}}</my-component>-->
-                <router-view :items="items" :info="info" :not="NotAvaliable" :courseinfo="courseinfo" :addrequest="addrequest" 
-                :wait="wait" :removerequest="removerequest"></router-view>
+                <router-view :items="items" :info="info" :not="NotAvaliable" 
+                :courseinfo="courseinfo" :addrequest="addrequest" 
+                :wait="wait" :removerequest="removerequest"
+                :expiredate="expiredate" :updateexpire="updateexpire"></router-view>
             </v-content>
               
         </v-app>
